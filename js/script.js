@@ -1,4 +1,7 @@
 
+
+        import { WEATHER_API_KEY } from "../config.js";
+
         // Premium Chart Setup matching the image perfectly
         const ctx = document.getElementById('premiumChart').getContext('2d');
         new Chart(ctx, {
@@ -138,11 +141,7 @@ function fetchLocationByIP() {
 function fetchWeatherData(lat, lon) {
     // Open-Meteo ko koi API key nahi chahiye hoti!
 
-
-    const apiKey = "c6fb2567ff2478f8635ca6d0767f4765";
-
-
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`;
 
     fetch(url)
         .then(response => response.json())
