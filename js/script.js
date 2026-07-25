@@ -132,19 +132,33 @@ function fetchLocationByIP() {
 
 // Weather Api ------------------- Start
 
+
+
+
 function fetchWeatherData(lat, lon) {
     // Open-Meteo ko koi API key nahi chahiye hoti!
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+
+    const apiKey = "c6fb2567ff2478f8635ca6d0767f4765";
+
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log("Open-Meteo se Data Aa Gaya:", data);
             
-            const temp = data.current_weather.temperature;
-            const windspeed = data.current_weather.windspeed;
+            const temp = data.main.temp;
+            // const windspeed = data.current_weather.windspeed;
+            // const temperature = data.current_weather_units.temperature;
+            // const windSpeedType = data.current_weather_units.windspeed;
+
+
+            document.querySelector(".display-3").innerHTML = `${temp} <span class="fs-2 fw-normal">C</span>`
+            // document.querySelector(".windspeed").innerHTML =  `${windspeed} <span class="fw-normal" style="font-size:12px;">${windSpeedType}</span>`
             
-            console.log(`Temperature: ${temp}°C, Windspeed: ${windspeed} km/h`);
+            
         })
         .catch(error => {
             console.error("Error:", error);
