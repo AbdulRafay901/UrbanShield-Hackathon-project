@@ -1,6 +1,7 @@
 
 
         import { WEATHER_API_KEY } from "../config.js";
+        import { AIR_API_KEY } from "../config.js";
 
         // Premium Chart Setup matching the image perfectly
         const ctx = document.getElementById('premiumChart').getContext('2d');
@@ -94,6 +95,7 @@ function getUserLocation() {
 
 
                 fetchWeatherData(lat, lon);
+                fetchAirData(lat, lon)
                 
                 
             },
@@ -125,6 +127,7 @@ function fetchLocationByIP() {
 
 
             fetchWeatherData(lat, lon)
+            fetchAirData(lat, lon)
             
             
         })
@@ -154,7 +157,7 @@ const elements = {
 
     try {
 
-        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
 
         const res = await fetch(url)
 
@@ -181,4 +184,48 @@ const elements = {
         console.log(error)
         
     }
+}
+
+
+
+const fetchAirData = async (lat,lon) => {
+
+    const element = {
+        aqi: document.querySelector(".aqi"),
+        air_level: document.querySelector(".air-level"),
+        air_circle: document.querySelector(".air-circle")
+    }
+
+    const url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`
+
+
+    const res = await fetch(url)
+    const data = await res.json()
+    console.log(data)
+
+    const aqi = element.aqi.textContent = data.list[0].main.aqi;
+
+
+        switch(aqi){
+            case 1:
+                console.log("Good")
+            break;
+            case 2:
+                console.log("Fair")
+            break;
+            case 3:
+                console.log("Moderate")
+            break;
+            case 4:
+                element.air_level.innerHTML = "Poor"
+                element.air_level.classList.add("air-level-js")
+                element.air_circle.classList.add("air-circle-js")
+            break;
+            case 5:
+                console.log("very poor")
+            break;
+            
+        }
+    
+
 }

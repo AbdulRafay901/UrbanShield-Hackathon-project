@@ -109,7 +109,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: conic-gradient(var(--color) calc(var(--val) * 1%), var(--border) 0);
+    background: conic-gradient(var(--success) calc((54) * 1%), var(--border) 0);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -169,6 +169,22 @@ body {
 .bg-primary-soft { background: rgba(37, 99, 235, 0.1); }
 .bg-warning-soft { background: rgba(245, 158, 11, 0.1); }
 .bg-info-soft { background: rgba(59, 130, 246, 0.1); }
+
+
+
+/* Air Quality Index ---------------- Start */
+
+
+.air-level-js{
+    color: #EF4444 !important;
+}
+.air-circle-js{
+    background: conic-gradient(#EF4444 calc((54) * 1%), var(--border) 0);
+}
+
+
+
+/* Air Quality Index ---------------- End */
 
 /* Responsive Media Queries */
 @media (max-width: 991px) {
