@@ -109,7 +109,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: conic-gradient(var(--success) calc((54) * 1%), var(--border) 0);
+    background: conic-gradient(var(--success) calc((0) * 1%), var(--border) 0);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -174,12 +174,50 @@ body {
 
 /* Air Quality Index ---------------- Start */
 
-
-.air-level-js{
+@property --aqi-val {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+.air-level-1{
+    color: #10B981 !important;
+}
+.air-circle-1{
+    --aqi-val: 20%;
+    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: conic-gradient(#10B981 var(--aqi-val), var(--border) 0);
+}
+.air-level-2{
+    color: #84CC16 !important;
+}
+.air-circle-2{
+    --aqi-val: 40%;
+    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: conic-gradient(#84CC16 var(--aqi-val), var(--border) 0);
+}
+.air-level-3{
+    color: #F59E0B !important;
+}
+.air-circle-3{
+    --aqi-val: 60%;
+    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: conic-gradient(#F59E0B var(--aqi-val), var(--border) 0);
+}
+.air-level-4{
     color: #EF4444 !important;
 }
-.air-circle-js{
-    background: conic-gradient(#EF4444 calc((54) * 1%), var(--border) 0);
+.air-circle-4{
+    --aqi-val: 80%;
+    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: conic-gradient(#EF4444 var(--aqi-val), var(--border) 0);
+}
+.air-level-5{
+    color: #7C3AED !important;
+}
+.air-circle-5{
+    --aqi-val: 100%;
+    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: conic-gradient(#7C3AED var(--aqi-val), var(--border) 0);
 }
 
 
