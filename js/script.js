@@ -122,6 +122,9 @@ function fetchLocationByIP() {
             console.log("Fallback Success! City:", data.city);
             const lat = data.lat;
             const lon = data.lon;
+
+
+            fetchWeatherData(lat, lon)
             
             
         })
@@ -136,30 +139,46 @@ function fetchLocationByIP() {
 // Weather Api ------------------- Start
 
 
+const elements = {
+  temp: document.querySelector(".display-3"),
+  wind: document.querySelector(".windspeed"),
+  name: document.querySelector(".name"),
+  feels: document.querySelector(".feels-like"),
+  humidity: document.querySelector(".humidity"),
+  pressure: document.querySelector(".pressure"),
+  visibility: document.querySelector(".visiblity"),
+};
 
 
-function fetchWeatherData(lat, lon) {
-    // Open-Meteo ko koi API key nahi chahiye hoti!
+ const fetchWeatherData = async (lat,lon) =>{
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`;
+    try {
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log("Open-Meteo se Data Aa Gaya:", data);
-            
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`;
+
+        const res = await fetch(url)
+
+        const data = await res.json();
+
             const temp = data.main.temp;
-            // const windspeed = data.current_weather.windspeed;
-            // const temperature = data.current_weather_units.temperature;
-            // const windSpeedType = data.current_weather_units.windspeed;
-
-
-            document.querySelector(".display-3").innerHTML = `${temp} <span class="fs-2 fw-normal">C</span>`
-            // document.querySelector(".windspeed").innerHTML =  `${windspeed} <span class="fw-normal" style="font-size:12px;">${windSpeedType}</span>`
+            const windspeed = data.wind.speed;
+            const name = data.weather[0].main;
+            const feels_like = data.main.feels_like;
+            const humidity = data.main.humidity;
+            const pressure = data.main.pressure;
+            const visiblity = data.visibility;
             
-            
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+            elements.temp.innerHTML = `${temp} <span class="fs-2 fw-normal">°C</span>`;
+            elements.wind.innerHTML = `${windspeed} <span style="font-size:12px;">km/h</span>`;
+            elements.name.textContent = name;
+            elements.feels.textContent = `${feels_like} °C`;
+            elements.humidity.textContent = `${humidity}%`;
+            elements.pressure.innerHTML = `${pressure} <span style="font-size:12px;">hPa</span>`;
+            elements.visibility.innerHTML = `${visiblity} <span style="font-size:12px;">km</span>`;
+        
+    } catch (error) {
+
+        console.log(error)
+        
+    }
 }
