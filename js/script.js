@@ -151,6 +151,7 @@ const elements = {
     humidity: document.querySelector(".humidity"),
     pressure: document.querySelector(".pressure"),
     visibility: document.querySelector(".visiblity"),
+    weather_img: document.querySelector(".weather-img")
 };
 
 
@@ -164,6 +165,8 @@ const fetchWeatherData = async (lat, lon) => {
 
         const data = await res.json();
 
+        console.log(data)
+
         const temp = data.main.temp;
         const windspeed = data.wind.speed;
         const name = data.weather[0].main;
@@ -171,6 +174,37 @@ const fetchWeatherData = async (lat, lon) => {
         const humidity = data.main.humidity;
         const pressure = data.main.pressure;
         const visiblity = data.visibility;
+
+        switch(name){
+            case "Clear":
+                elements.weather_img.src = "assets/sun.png";
+            break;
+            case "Clouds":
+                elements.weather_img.src = "assets/cloudy.png"    
+            break;
+            case "PartlyCloudy":
+                elements.weather_img.src = "assets/cloudy-sun.png"    
+            break;
+            case "Rain":
+                elements.weather_img.src = "assets/rainy-day.png"    
+            break;
+            case "Drizzle":
+                elements.weather_img.src = "assets/rainy-day.png"    
+            break;
+            case "Thunderstorm":
+                elements.weather_img.src = "assets/thunderstorm.png"    
+            break;
+            case "Snow":
+                elements.weather_img.src = "assets/snowy.png"    
+            break;
+            case "Haze":
+            case "Mist":
+            case "Fog":
+            case "Smoke":       
+                elements.weather_img.src = "assets/cloud.png"    
+            break;
+            
+        }
 
         elements.temp.innerHTML = `${temp}<sup style="font-size:37px; margin:0 3px;">°C</sup>`;
         elements.wind.innerHTML = `${windspeed} <span style="font-size:12px;">km/h</span>`;
@@ -202,7 +236,6 @@ const fetchAirData = async (lat, lon) => {
 
     const res = await fetch(url)
     const data = await res.json()
-    console.log(data)
 
     const aqi = element.aqi.textContent = data.list[0].main.aqi;
     const pm25 = data.list[0].components.pm2_5;
@@ -247,14 +280,9 @@ const fetchAirData = async (lat, lon) => {
 
 // Ai Suggestion For Air Qualtity ----------------- Start
 
-// Apni Gemini API Key yahan dalein
-
-
 async function getShortAISuggestion(aqiLevel, pm25, lat, lon) {
     const textElem = document.querySelector(".AirQuality-Ai");
-    
-     
-    // PROMPT MAGIC: Yahan hum AI ko force kar rahe hain ki sirf 1 short line de
+        
     const prompt = `
     You are an AI for an app called Urban Shield. 
     Location Coordinates: Latitude ${lat}, Longitude ${lon}.
@@ -279,15 +307,13 @@ async function getShortAISuggestion(aqiLevel, pm25, lat, lon) {
         const data = await response.json();
         
         if (!response.ok || !data.candidates) {
-            throw new Error(data.error?.message || "Google API ne response Error");
+            throw new Error(data.error?.message || "Google API response Error");
         }
     
         let aiLine = data.candidates[0].content.parts[0].text.trim();
         
-    
-        if (textElem) {        
-            textElem.textContent = aiLine;
-        }
+        textElem.textContent = aiLine;
+        
 
     } catch (error) {
         console.error("AI Error:", error);
