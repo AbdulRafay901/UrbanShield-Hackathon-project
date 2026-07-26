@@ -1,9 +1,12 @@
-
+// Api Keys 
 
 import { WEATHER_API_KEY } from "../config.js";
 import { AIR_API_KEY } from "../config.js";
+import { GEMINI_API_KEY } from "../config.js";
 
-// Premium Chart Setup matching the image perfectly
+// Api Keys 
+
+
 const ctx = document.getElementById('premiumChart').getContext('2d');
 new Chart(ctx, {
     type: 'line',
@@ -48,7 +51,7 @@ new Chart(ctx, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { display: false } }, // Custom legend used in HTML
+        plugins: { legend: { display: false } }, 
         scales: {
             x: {
                 grid: { display: false, drawBorder: false },
@@ -70,16 +73,16 @@ new Chart(ctx, {
 
 
 
-// Website load hote hi ye function chalega
+
 window.onload = function () {
     getUserLocation();
 };
 
-function getUserLocation() {
-    // Check agar browser Geolocation support karta hai
+const getUserLocation = async () => {
+  
     if (navigator.geolocation) {
 
-        // Timeout option add kiya hai taakay zyada dair load na ho
+    
         const options = {
             enableHighAccuracy: true,
             timeout: 5000,
@@ -93,10 +96,8 @@ function getUserLocation() {
                 const lon = position.coords.longitude;
                 console.log("Success! Latitude:", lat, "Longitude:", lon);
 
-
                 fetchWeatherData(lat, lon);
                 fetchAirData(lat, lon)
-
 
             },
 
@@ -116,7 +117,7 @@ function getUserLocation() {
 }
 
 
-function fetchLocationByIP() {
+const fetchLocationByIP = async () => {
 
     fetch('http://ip-api.com/json/')
         .then(response => response.json())
@@ -204,6 +205,11 @@ const fetchAirData = async (lat, lon) => {
     console.log(data)
 
     const aqi = element.aqi.textContent = data.list[0].main.aqi;
+    const pm25 = data.list[0].components.pm2_5;
+
+    getShortAISuggestion(aqi, pm25, lat, lon)
+
+    console.log(pm25)
 
 
     switch (aqi) {
@@ -237,3 +243,59 @@ const fetchAirData = async (lat, lon) => {
 
 
 }
+
+
+// Ai Suggestion For Air Qualtity ----------------- Start
+
+// Apni Gemini API Key yahan dalein
+
+
+async function getShortAISuggestion(aqiLevel, pm25, lat, lon) {
+    const textElem = document.querySelector(".AirQuality-Ai");
+    
+     
+    // PROMPT MAGIC: Yahan hum AI ko force kar rahe hain ki sirf 1 short line de
+    const prompt = `
+    You are an AI for an app called Urban Shield. 
+    Location Coordinates: Latitude ${lat}, Longitude ${lon}.
+    Current AQI Level (1-5): ${aqiLevel}. 
+    PM2.5: ${pm25} µg/m³.
+    
+    Write EXACTLY ONE short sentence of health advice for the user based on this air quality. 
+    Maximum length: 5 to 8 words. 
+    Examples: "Good air quality for most people." or "Hazardous air, wear a mask today!"
+    Do not mention the coordinates in the response. Just the single short sentence.
+    `;
+
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${GEMINI_API_KEY}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: prompt }] }]
+            })
+        });
+
+        const data = await response.json();
+        
+        if (!response.ok || !data.candidates) {
+            throw new Error(data.error?.message || "Google API ne response Error");
+        }
+    
+        let aiLine = data.candidates[0].content.parts[0].text.trim();
+        
+    
+        if (textElem) {        
+            textElem.textContent = aiLine;
+        }
+
+    } catch (error) {
+        console.error("AI Error:", error);
+        if (textElem) {
+            textElem.textContent = "Check local air guidelines."; 
+        }
+    }
+}
+
+
+// Ai Suggestion For Air Qualtity ----------------- End
