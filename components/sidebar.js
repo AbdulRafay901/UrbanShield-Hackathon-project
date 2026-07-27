@@ -1,4 +1,4 @@
-// Load Sidebar Component into DOM
+
 fetch('components/sidebar.html')
     .then(response => response.text())
     .then(data => {
@@ -23,7 +23,7 @@ function initSidebarNavigation() {
                 window.switchPage(pageId);
             }
 
-            // Close mobile sidebar menu if open
+            
             const sidebar = document.querySelector('.sidebar');
             if (sidebar && sidebar.classList.contains('mobile-show')) {
                 sidebar.classList.remove('mobile-show');
@@ -32,5 +32,5 @@ function initSidebarNavigation() {
     });
 }
 
-// Make initSidebarNavigation globally available if re-initialization is needed
+
 window.initSidebarNavigation = initSidebarNavigation;
