@@ -16,18 +16,33 @@
 
 body {
     background-color: var(--bg-main);
-    font-family: 'Inter', sans-serif; /* Premium Font */
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
     margin: 0;
     overflow-x: hidden;
 }
 
+/* Page View SPA Navigation */
+.page-view {
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-view.d-none {
+    display: none !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Layout */
 .dashboard-layout {
-    
+    min-height: 100vh;
 }
 .main-content {
     padding: 30px 40px;
-
+    min-width: 0;
+    width: 100%;
 }
 
 /* Header Elements */
@@ -43,12 +58,32 @@ body {
     width: 320px;
     transition: all 0.3s ease;
 }
-.search-container:focus-within { border-color: var(--primary); }
+.search-container:focus-within { 
+    border-color: var(--primary); 
+    box-shadow: 0 0 12px rgba(37, 99, 235, 0.2);
+}
 .search-container i { color: var(--text-light); font-size: 18px; margin-right: 10px; }
 .search-container input {
     background: none; border: none; color: var(--text); outline: none; width: 100%; font-size: 14px;
 }
 .search-container input::placeholder { color: var(--text-light); }
+
+.hero-showcase-btn {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(90, 59, 255, 0.2) 100%);
+    border: 1px solid rgba(37, 99, 235, 0.4);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.hero-showcase-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
 
 .notification-btn {
     background: var(--bg-card);
@@ -60,6 +95,11 @@ body {
     font-size: 18px;
     position: relative;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+.notification-btn:hover {
+    border-color: var(--primary);
+    color: #ffffff;
 }
 .notification-btn .dot {
     position: absolute; top: 8px; right: 8px;
@@ -75,11 +115,32 @@ body {
     border: 1px solid var(--border);
 }
 
+/* Mobile Toggle & Backdrop */
+.mobile-toggle-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px 12px;
+}
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1040;
+}
+.sidebar-backdrop.active {
+    display: block;
+}
+
 /* Base Cards */
-.premium-card {
+.premium-card,
+.UV-card {
     border-radius: 16px;
     padding: 24px;
     border: 1px solid var(--border);
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .bg-card {
     background-color: var(--bg-card);
@@ -89,28 +150,28 @@ body {
 .weather-gradient {
     background: linear-gradient(145deg, #1d4ed8 0%, #4338ca 100%);
     border: none;
-    box-shadow: 0 15px 30px rgba(29, 78, 216, 0.15);
+    box-shadow: 0 15px 30px rgba(29, 78, 216, 0.2);
 }
 .detail-label {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.65);
     font-size: 11px;
     margin-bottom: 4px;
     display: block;
 }
 .weather-details {
-    background: rgba(0,0,0, 0.15);
+    background: rgba(0, 0, 0, 0.18);
     border-radius: 12px;
     padding: 12px 20px;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Pure CSS Circular Progress (No ugly borders) */
+/* Circular Progress Meters */
 .circular-progress,
 .uv-circle {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: conic-gradient(var(--success) calc((0) * 1%), var(--border) 0);
+    background: conic-gradient(var(--success) 40%, var(--border) 0);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,8 +181,8 @@ body {
 .uv-circle::before {
     content: "";
     position: absolute;
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     background-color: var(--bg-card);
     border-radius: 50%;
 }
@@ -136,10 +197,11 @@ body {
 .alert-danger { border: 1px solid rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.05); }
 .alert-success { border: 1px solid rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.05); }
 
-/* Nearby Places Scroll */
+/* Hide Scrollbars */
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* Nearby Places Cards */
 .place-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border);
@@ -151,84 +213,221 @@ body {
     align-items: center;
     justify-content: center;
     gap: 6px;
-    transition: 0.3s ease;
+    transition: 0.25s ease;
     cursor: pointer;
 }
-.place-card:hover { border-color: var(--primary); background: rgba(37, 99, 235, 0.05); }
+.place-card:hover { 
+    border-color: var(--primary); 
+    background: rgba(37, 99, 235, 0.08); 
+    transform: translateY(-3px);
+}
 .place-card h6 { font-size: 13px; margin: 0; font-weight: 500; }
 .place-card span { color: var(--text-light); font-size: 11px; }
 
-/* Custom Soft Color Backgrounds for Icons */
+/* Forecast Cards */
+.forecast-hourly-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    min-width: 75px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+.forecast-hourly-item:hover {
+    border-color: var(--primary);
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.weekly-forecast-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+    min-width: 75px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+.weekly-forecast-item:hover {
+    border-color: var(--primary);
+    background: rgba(37, 99, 235, 0.1);
+}
+
+/* Icon Soft Background Utilities */
 .icon-wrapper {
     width: 44px; height: 44px;
     border-radius: 12px;
     display: flex; justify-content: center; align-items: center;
     font-size: 20px;
-    margin-bottom: 5px;
 }
-.bg-danger-soft { background: rgba(239, 68, 68, 0.1); }
-.bg-success-soft { background: rgba(16, 185, 129, 0.1); }
-.bg-primary-soft { background: rgba(37, 99, 235, 0.1); }
-.bg-warning-soft { background: rgba(245, 158, 11, 0.1); }
-.bg-info-soft { background: rgba(59, 130, 246, 0.1); }
+.bg-danger-soft { background: rgba(239, 68, 68, 0.12); }
+.bg-success-soft { background: rgba(16, 185, 129, 0.12); }
+.bg-primary-soft { background: rgba(37, 99, 235, 0.12); }
+.bg-warning-soft { background: rgba(245, 158, 11, 0.12); }
+.bg-info-soft { background: rgba(59, 130, 246, 0.12); }
+.bg-dark-soft { background: rgba(255, 255, 255, 0.04); }
 
+/* Air Quality Dynamic Classes */
+@property --aqi-val { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
 
+.air-level-1 { color: #10B981 !important; }
+.air-circle-1 { --aqi-val: 20%; background: conic-gradient(#10B981 var(--aqi-val), var(--border) 0); }
+.air-card-1 { background: linear-gradient(to right, rgba(16, 185, 129, 0.15) 0%, var(--bg-card) 90%) !important; }
 
-/* Air Quality Index ---------------- Start */
+.air-level-2 { color: #84CC16 !important; }
+.air-circle-2 { --aqi-val: 40%; background: conic-gradient(#84CC16 var(--aqi-val), var(--border) 0); }
+.air-card-2 { background: linear-gradient(to right, rgba(132, 204, 22, 0.15) 0%, var(--bg-card) 90%) !important; }
 
-@property --aqi-val {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
-}
-.air-level-1{
-    color: #10B981 !important;
-}
-.air-circle-1{
-    --aqi-val: 20%;
-    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    background: conic-gradient(#10B981 var(--aqi-val), var(--border) 0);
-}
-.air-level-2{
-    color: #84CC16 !important;
-}
-.air-circle-2{
-    --aqi-val: 40%;
-    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    background: conic-gradient(#84CC16 var(--aqi-val), var(--border) 0);
-}
-.air-level-3{
-    color: #F59E0B !important;
-}
-.air-circle-3{
-    --aqi-val: 60%;
-    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    background: conic-gradient(#F59E0B var(--aqi-val), var(--border) 0);
-}
-.air-level-4{
-    color: #EF4444 !important;
-}
-.air-circle-4{
-    --aqi-val: 80%;
-    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    background: conic-gradient(#EF4444 var(--aqi-val), var(--border) 0);
-}
-.air-level-5{
-    color: #7C3AED !important;
-}
-.air-circle-5{
-    --aqi-val: 100%;
-    transition: --aqi-val 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    background: conic-gradient(#7C3AED var(--aqi-val), var(--border) 0);
+.air-level-3 { color: #F59E0B !important; }
+.air-circle-3 { --aqi-val: 60%; background: conic-gradient(#F59E0B var(--aqi-val), var(--border) 0); }
+.air-card-3 { background: linear-gradient(to right, rgba(245, 158, 11, 0.15) 0%, var(--bg-card) 90%) !important; }
+
+.air-level-4 { color: #EF4444 !important; }
+.air-circle-4 { --aqi-val: 80%; background: conic-gradient(#EF4444 var(--aqi-val), var(--border) 0); }
+.air-card-4 { background: linear-gradient(to right, rgba(239, 68, 68, 0.15) 0%, var(--bg-card) 90%) !important; }
+
+.air-level-5 { color: #7C3AED !important; }
+.air-circle-5 { --aqi-val: 100%; background: conic-gradient(#7C3AED var(--aqi-val), var(--border) 0); }
+.air-card-5 { background: linear-gradient(to right, rgba(124, 58, 237, 0.15) 0%, var(--bg-card) 90%) !important; }
+
+/* Interactive Dark Map Visualizer */
+.dark-map-container {
+    background: #090E1A;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1) 0%, transparent 70%),
+        linear-gradient(rgba(36, 47, 74, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36, 47, 74, 0.2) 1px, transparent 1px);
+    background-size: 100% 100%, 25px 25px, 25px 25px;
+    position: relative;
 }
 
+.user-map-pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.pin-radar {
+    position: absolute;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    animation: radarPulse 2s infinite ease-out;
+    top: -16px;
+}
 
-/* Air Quality Index ---------------- End */
+@keyframes radarPulse {
+    0% { transform: scale(0.2); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.pin-label {
+    background: rgba(11, 16, 32, 0.85);
+    border: 1px solid var(--primary);
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 10px;
+    margin-top: 4px;
+    white-space: nowrap;
+}
+
+.map-pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.map-pin:hover {
+    transform: translate(-50%, -50%) scale(1.25);
+    z-index: 10;
+}
+.pin-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    margin-bottom: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.map-pin:hover .pin-tooltip {
+    opacity: 1;
+}
+
+/* Emergency Call Card & Pulsing SOS */
+.emergency-call-card {
+    transition: all 0.25s ease;
+}
+.emergency-call-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.pulse-icon {
+    animation: sosPulse 1.5s infinite ease-in-out;
+}
+@keyframes sosPulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.12); opacity: 1; filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.6)); }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+.share-location-btn {
+    transition: all 0.3s ease;
+}
+.share-location-btn:hover {
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.5) !important;
+}
+
+/* Alert Feed Items */
+.alert-feed-item {
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+}
+.border-left-primary { border-left: 4px solid var(--primary) !important; }
+.border-left-danger { border-left: 4px solid var(--danger) !important; }
+.border-left-success { border-left: 4px solid var(--success) !important; }
+.border-left-warning { border-left: 4px solid var(--warning) !important; }
+
+/* Hero Showcase Modal */
+.hero-showcase-container {
+    background: radial-gradient(circle at center, #1E293B 0%, #0B1020 100%);
+    min-height: 420px;
+}
+.shield-hero-badge {
+    width: 100px;
+    height: 100px;
+    background: rgba(37, 99, 235, 0.1);
+    border: 2px solid rgba(37, 99, 235, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.3);
+}
 
 /* Responsive Media Queries */
-@media (max-width: 991px) {
+@media (max-width: 991.98px) {
     .main-content { padding: 20px; }
-    .search-container { width: auto; flex-grow: 1; margin-right: 15px; }
-    .location-header { display: none !important; } /* Hide on small screens to save space */
+    .search-container { width: auto; flex-grow: 1; }
+    .location-header { display: none !important; }
+}
+
+@media (max-width: 575.98px) {
+    .main-content { padding: 15px 12px; }
+    .topbar { flex-wrap: wrap; }
+    .display-3 { font-size: 2.2rem; }
+    .display-2 { font-size: 2.6rem; }
 }

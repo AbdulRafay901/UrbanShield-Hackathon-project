@@ -1,92 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="" href="siderbar.css">
-</head>
-<body>
-       
-
-
-    <div class="sidebar">
-        <div class="logo-text">
-              <img src="../assets/logo.png">
-              <div class="text">
-                    <h4>UrbanShield</h4>
-                    <p>Stay Safe Stay informed</p>
-              </div>
-        </div>
-        <div class="tabs">
-              <div class="tab tab-active">
-                    <i class="ri-home-4-line"></i>
-                    <p>Dashboard</p>
-              </div>
-              <div class="tab">
-                    <i class="ri-cloud-line"></i>
-                    <p>Weather</p>
-              </div>
-              <div class="tab">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-	                   <path d="M0 0h24v24H0z" fill="none" />
-	                   <path fill="currentColor" d="M11.5 20q-1.25 0-2.125-.875T8.5 17h2q0 .425.288.713T11.5 18t.713-.288T12.5 17t-.288-.712T11.5 16H2v-2h9.5q1.25 0 2.125.875T14.5 17t-.875 2.125T11.5 20M2 10V8h13.5q.65 0 1.075-.425T17 6.5t-.425-1.075T15.5 5t-1.075.425T14 6.5h-2q0-1.475 1.013-2.488T15.5 3t2.488 1.013T19 6.5t-1.012 2.488T15.5 10zm16.5 8v-2q.65 0 1.075-.425T20 14.5t-.425-1.075T18.5 13H2v-2h16.5q1.475 0 2.488 1.013T22 14.5t-1.012 2.488T18.5 18" />
-                   </svg>
-
-                    <p>Air Quality</p>
-              </div>
-              <div class="tab">
-                    <i class="ri-map-2-line"></i>
-                    <p>Map</p>
-              </div>
-              <div class="tab">
-                    <i class="ri-aed-line"></i>
-                    <p>Emergency</p>
-              </div>
-              <div class="tab">
-                    <i class="ri-notification-3-line"></i>
-                    <p>Alerts</p>
-              </div>
-              <div class="tab">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 640 640">
-	                   <path d="M0 0h640v640H0z" fill="none" />
-	                   <path fill="currentColor" d="M240 64h80v56c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V64h80c26.5 0 48 21.5 48 48v416c0 26.5-21.5 48-48 48H419.2c8.2-14.1 12.8-30.5 12.8-48V368c10-13.4 16-30 16-48v-32c0-44.2-35.8-80-80-80H192v-96c0-26.5 21.5-48 48-48M64 400h320v128c0 26.5-21.5 48-48 48H112c-26.5 0-48-21.5-48-48zm16-144h288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H80c-17.7 0-32-14.3-32-32v-32c0-17.7 14.3-32 32-32" />
-                    </svg>
-                    <p>Packing Assistant</p>
-              </div>
-              <div class="tab">
-                    <i class="ri-heart-line"></i>
-                    <p>Favourite</p>
-              </div>
-              <div class="tab">
-                    <i class="ri-history-line"></i>
-                    <p>History</p>
-              </div>
-              <div class="tab">
-                    <i class="ri-settings-2-line"></i>
-                    <p>Settings</p>
-              </div>
-        </div>
-        <div class="safety-score">
-               <p>Safety Score</p>
-               <div class="circle">
-                     <h1>82</h1>
-                     <p>100</p>
-               </div>
-               <div class="safety-zone">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48">
-	<path d="M0 0h48v48H0z" fill="none" />
-	<path fill="currentColor" stroke="currentColor" stroke-width="4" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z" />
-</svg>
-
-                  <p>You are in Safe zone</p>
-               </div>
+<div class="sidebar">
+    <div class="logo-text">
+        <img src="assets/logo.png" alt="UrbanShield Logo">
+        <div class="text">
+            <h4>UrbanShield</h4>
+            <p>Stay Safe, Stay Informed</p>
         </div>
     </div>
 
+    <div class="tabs">
+        <div class="tab tab-active" data-page="dashboard">
+            <i class="ri-home-4-line"></i>
+            <p>Dashboard</p>
+        </div>
+        <div class="tab" data-page="weather">
+            <i class="ri-cloud-line"></i>
+            <p>Weather</p>
+        </div>
+        <div class="tab" data-page="air-quality">
+            <i class="ri-windy-line"></i>
+            <p>Air Quality</p>
+        </div>
+        <div class="tab" data-page="map">
+            <i class="ri-map-2-line"></i>
+            <p>Map</p>
+        </div>
+        <div class="tab" data-page="emergency">
+            <i class="ri-alarm-warning-line"></i>
+            <p>Emergency</p>
+        </div>
+        <div class="tab" data-page="alerts">
+            <i class="ri-notification-3-line"></i>
+            <p>Alerts</p>
+        </div>
+        <div class="tab" data-page="analytics">
+            <i class="ri-bar-chart-box-line"></i>
+            <p>Analytics</p>
+        </div>
+        <div class="tab" data-page="packing">
+            <i class="ri-suitcase-line"></i>
+            <p>Packing Assistant</p>
+        </div>
+        <div class="tab" data-page="favorites">
+            <i class="ri-heart-line"></i>
+            <p>Favorites</p>
+        </div>
+        <div class="tab" data-page="history">
+            <i class="ri-history-line"></i>
+            <p>History</p>
+        </div>
+        <div class="tab" data-page="settings">
+            <i class="ri-settings-2-line"></i>
+            <p>Settings</p>
+        </div>
+    </div>
 
-</body>
-</html>
+    <div class="safety-score mt-auto">
+        <p>Safety Score</p>
+        <div class="circle">
+            <h1 id="safetyScoreValue">82</h1>
+            <p>/100</p>
+        </div>
+        <div class="safety-zone">
+            <i class="ri-checkbox-circle-fill me-1 text-success fs-6"></i>
+            <p>You are in Safe Zone</p>
+        </div>
+    </div>
+</div>

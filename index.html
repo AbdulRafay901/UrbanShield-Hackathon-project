@@ -94,7 +94,7 @@
                     <div class="row g-4 mb-3">
                         <!-- AQI Card -->
                         <div class="col-sm-6">
-                            <div class="premium-card bg-card h-100">
+                            <div class="premium-card bg-card h-100 air-card">
                                 <h6 class="text-white mb-3 fs-6">Air Quality Index</h6>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -110,7 +110,7 @@
                         </div>
                         <!-- UV Card -->
                         <div class="col-sm-6">
-                            <div class="premium-card bg-card h-100">
+                            <div class="UV-card bg-card h-100">
                                 <h6 class="text-white mb-3 fs-6">UV Index</h6>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -127,32 +127,34 @@
                     <!-- Alert Mini Cards -->
                     <div class="row g-3">
                         <div class="col-sm-4">
-                            <div class="alert-box alert-primary">
+                            <div class="alert-box alert-primary weather-mini-card">
                                 <div class="d-flex gap-2 align-items-center mb-1">
-                                    <i class="ri-rainy-fill text-primary"></i>
-                                    <span class="text-white fw-medium" style="font-size: 12px;">Rain <span class="text-muted">Expected</span></span>
+                                    <p style="margin: 0;"></p>
+                                    <span class="text-white fw-medium" style="font-size: 12px;">
+                                        <span class="text-muted"></span>
+                                    </span>
                                 </div>
-                                <p class="mb-0" style="font-size: 10px; color: var(--text-light);">Light rain in the evening.</p>
+                                <p class="mb-0" style="font-size: 10px; color: var(--text-light);"></p>
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="alert-box alert-danger">
-                                <div class="d-flex gap-2 align-items-center mb-1">
-                                    <i class="ri-fire-fill text-danger"></i>
-                                    <span class="text-danger fw-medium" style="font-size: 12px;">Heat Alert</span>
-                                </div>
-                                <p class="mb-0" style="font-size: 10px; color: var(--text-light);">Stay hydrated. Drink more water.</p>
+                        <div class="alert-box alert-danger" id="uvAlertCard">
+                            <div class="d-flex gap-2 align-items-center mb-1">
+                                <p style="margin: 0;" id="uvAlertIcon"></p>
+                                <span class="text-danger fw-medium" id="uvAlertTitle" style="font-size: 12px;"></span>
                             </div>
+                            <p class="mb-0" id="uvAlertDesc" style="font-size: 10px; color: var(--text-light);"></p>
                         </div>
+                         </div>
                         <div class="col-sm-4">
-                            <div class="alert-box alert-success">
-                                <div class="d-flex gap-2 align-items-center mb-1">
-                                    <i class="ri-leaf-fill text-success"></i>
-                                    <span class="text-success fw-medium" style="font-size: 12px;">Air Quality</span>
-                                </div>
-                                <p class="mb-0" style="font-size: 10px; color: var(--text-light);">AQI is moderate today.</p>
-                            </div>
-                        </div>
+                         <div class="alert-box alert-success" id="airAlertCard">
+                             <div class="d-flex gap-2 align-items-center mb-1">
+                                 <i style="margin: 0;" id="airAlertIcon"></i>
+                                 <span class="text-success fw-medium" id="airAlertTitle" style="font-size: 12px;"></span>
+                             </div>
+                             <p class="mb-0" id="airAlertDesc" style="font-size: 10px; color: var(--text-light);"></p>
+                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
