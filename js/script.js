@@ -73,6 +73,7 @@ new Chart(ctx, {
 
 
 
+let location_name = document.querySelector(".location-name");
 
 window.onload = function () {
     getUserLocation();
@@ -94,10 +95,11 @@ const getUserLocation = async () => {
             function (position) {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
-                console.log("Success! Latitude:", lat, "Longitude:", lon);
+                
 
                 fetchWeatherData(lat, lon);
                 fetchAirData(lat, lon)
+                fetchUvData(lat,lon)
 
             },
 
@@ -111,31 +113,34 @@ const getUserLocation = async () => {
             options
         );
     } else {
-        console.error("Aapka browser geolocation support nahi karta.");
+        console.error("Browser Not support geolocation");
         fetchLocationByIP();
     }
 }
 
 
 const fetchLocationByIP = async () => {
+    try {
+    
+        const res = await fetch('http://ip-api.com/json/');
+        
 
-    fetch('http://ip-api.com/json/')
-        .then(response => response.json())
-        .then(data => {
-            console.log("Fallback Success! City:", data.city);
-            const lat = data.lat;
-            const lon = data.lon;
+        const data = await res.json();
+        
+        location_name.textContent = `${data.city}, ${data.regionName}`
+        
+        const lat = data.lat;
+        const lon = data.lon;
 
+        
+        fetchWeatherData(lat, lon);
+        fetchAirData(lat, lon);
+        fetchUvData(lat, lon);
 
-            fetchWeatherData(lat, lon)
-            fetchAirData(lat, lon)
-
-
-        })
-        .catch(err => {
-            console.error("IP Location bhi fail ho gayi:", err);
-
-        });
+    } catch (err) {
+        
+        console.error("IP Location Fail:", err);
+    }
 }
 
 
@@ -173,7 +178,7 @@ const fetchWeatherData = async (lat, lon) => {
         const feels_like = data.main.feels_like;
         const humidity = data.main.humidity;
         const pressure = data.main.pressure;
-        const visiblity = data.visibility;
+        const visiblity = (data.visibility / 1000).toFixed(1);
 
         switch(name){
             case "Clear":
@@ -325,3 +330,72 @@ async function getShortAISuggestion(aqiLevel, pm25, lat, lon) {
 
 
 // Ai Suggestion For Air Qualtity ----------------- End
+
+
+// UV Api -------------------- Start
+
+const uvValueElem = document.querySelector(".uv-value"); 
+const uvStatusElem = document.querySelector(".uv-status"); 
+const uvAdviceElem = document.querySelector(".uv-advice"); 
+const uvCircle = document.querySelector(".uv-circle");
+
+const fetchUvData = async (lat, lon) => {
+
+     try {
+
+     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=uv_index`;;
+
+     const res = await fetch(apiUrl)
+     const data = await res.json()
+
+     const uvIndex = Math.round(data.current.uv_index); 
+
+    if(uvIndex){
+         uvValueElem.textContent = uvIndex;
+    }
+
+    if (uvIndex <= 2) {
+        uvStatusElem.textContent = "Low";
+        uvAdviceElem.textContent = "No protection needed. Safe to be outside.";
+        uvValueElem.classList.add("air-level-1")
+        uvStatusElem.classList.add("air-level-1")
+        uvCircle.classList.add("air-circle-1")
+    } 
+    else if (uvIndex <= 5) {
+        statusText = "Moderate";
+        adviceText = "Wear sunglasses and use sunscreen.";
+        uvValueElem.classList.add("air-level-2")
+        uvStatusElem.classList.add("air-level-2")
+        uvCircle.classList.add("air-circle-2")
+    } 
+    else if (uvIndex <= 7) {
+        statusText = "High";
+        adviceText = "Use sunscreen & wear sunglasses."; 
+        uvValueElem.classList.add("air-level-3")
+        uvStatusElem.classList.add("air-level-3")
+        uvCircle.classList.add("air-circle-3")
+
+    } 
+    else if (uvIndex <= 10) {
+        statusText = "Very High";
+        adviceText = "Minimize sun exposure. Wear protective clothing.";
+        uvValueElem.classList.add("air-level-4")
+        uvStatusElem.classList.add("air-level-4")
+        uvCircle.classList.add("air-circle-4")
+
+    } 
+    else {
+        statusText = "Extreme";
+        adviceText = "Avoid being outside. Stay in the shade!";
+        uvValueElem.classList.add("air-level-5")
+        uvStatusElem.classList.add("air-level-5")
+        uvCircle.classList.add("air-circle-5")
+    }
+
+        
+     } catch (error) {
+        console.log(error)
+     }
+}
+
+// UV Api -------------------- End

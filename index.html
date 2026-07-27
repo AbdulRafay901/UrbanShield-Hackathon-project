@@ -37,7 +37,7 @@
                 <div class="location-header d-flex flex-column align-items-center">
                     <div class="d-flex align-items-center gap-2">
                         <i class="ri-map-pin-fill text-white fs-5"></i>
-                        <span class="text-white fw-semibold">Hyderabad, Pakistan</span>
+                        <span class="text-white fw-semibold location-name"></span>
                     </div>
                     <small class="text-muted">Auto-detected</small>
                 </div>
@@ -114,12 +114,12 @@
                                 <h6 class="text-white mb-3 fs-6">UV Index</h6>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
-                                        <h2 class="text-white fw-bold mb-0">6</h2>
-                                        <span class="text-warning fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 1px;">High</span>
+                                        <h2 class="fw-bold mb-0 uv-value"></h2>
+                                        <span class="fw-medium text-uppercase uv-status" style="font-size: 12px; letter-spacing: 1px; "></span>
                                     </div>
-                                    <div class="circular-progress" style="--val: 60; --color: var(--warning);"></div>
+                                    <div class="uv-circle"></div>
                                 </div>
-                                <p class="text-muted mt-3 mb-0" style="font-size: 12px; line-height: 1.5;">Use sunscreen & wear sunglasses.</p>
+                                <p class="text-muted mt-3 mb-0 uv-advice" style="font-size: 12px; line-height: 1.5;"></p>
                             </div>
                         </div>
                     </div>
