@@ -124,9 +124,6 @@ export function updateAirScore(aqi) {
 }
 
 
-
-
-
 function calculate() {
 
     if (Object.values(state).includes(null)) return;
@@ -160,6 +157,10 @@ function calculate() {
     };
 
     localStorage.setItem('safetyscore', JSON.stringify(updatedSafetyScore));
+
+    loadSidebar()
+
+
 
 }
 

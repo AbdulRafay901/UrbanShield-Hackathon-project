@@ -49,6 +49,7 @@ const searchCity = async (city) => {
         fetchNearbyPlaces(lat, lon);
         fetchChartData(lat, lon);
 
+
         searchInput.value = "";
 
     } catch (err) {
@@ -81,6 +82,7 @@ const sidebarload = async () => {
 sidebarload()
 
     function loadSidebar(){
+
         const scoreElement = document.querySelector("#safetyScoreValue");
         const zoneText = document.querySelector(".safety-zone p");
         const zoneIcon = document.querySelector(".safety-zone i");

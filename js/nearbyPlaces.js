@@ -59,12 +59,22 @@ export const fetchNearbyPlaces = async (lat, lon) => {
     // if Api Not Fetch Than Api Call
     container.innerHTML = `<span class="text-muted small">Locating nearby places... </span>`;
 
-    const query = `[out:json][timeout:10];
-        (node["amenity"~"hospital|pharmacy|police|fuel|atm"](around:3000, ${lat}, ${lon}););
-        out body 8;`;
+    const query = `
+[out:json][timeout:25];
+(
+  node["amenity"~"^(hospital|pharmacy|police|fuel|atm)$"](around:3000,${lat},${lon});
+);
+out body;
+`;
 
     try {
-        const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`);
+        const res = await fetch("https://overpass.kumi.systems/api/interpreter", {
+           method: "POST",
+           headers: {
+             "Content-Type": "text/plain"
+           },
+           body: query
+        });
         if (!res.ok) throw new Error("API Network issue");
         
         const data = await res.json();
