@@ -123,13 +123,11 @@ export function updateAirScore(aqi) {
     calculate();
 }
 
-function calculate() {
 
-    
-const scoreElement = document.getElementById("safetyScoreValue");
-const zoneText = document.querySelector(".safety-zone p");
-const zoneIcon = document.querySelector(".safety-zone i");
-const safeyCircle = document.querySelector(".safety-score .circle")
+
+
+
+function calculate() {
 
     if (Object.values(state).includes(null)) return;
 
@@ -152,14 +150,17 @@ const safeyCircle = document.querySelector(".safety-score .circle")
 
     score = Math.max(score, 0);
 
-    scoreElement.textContent = score;
-
     const zone = ZONES.find(z => score >= z.min);
 
-    zoneText.textContent = zone.text;
-    zoneIcon.className = `${zone.icon} me-1 ${zone.color} fs-6`;
-    safeyCircle.classList.add(`${zone.classList}`)
-    
+    const updatedSafetyScore = {
+     val: score,
+     text: zone.text,
+     icon: `${zone.icon} me-1 ${zone.color} fs-6`,
+     color: zone.classList
+    };
+
+    localStorage.setItem('safetyscore', JSON.stringify(updatedSafetyScore));
+
 }
 
 

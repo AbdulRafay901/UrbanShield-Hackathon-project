@@ -182,40 +182,10 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>
-        // Load Sidebar dynamically with relative path support
-        const isPagesDir = window.location.pathname.includes('/pages/');
-        const sidebarPath = isPagesDir ? '../components/sidebar.html' : 'components/sidebar.html';
-
-        fetch(sidebarPath)
-            .then(res => res.text())
-            .then(data => {
-                const sidebarContainer = document.getElementById("sidebarComponent");
-                if (sidebarContainer) {
-                    sidebarContainer.innerHTML = data;
-
-                    // Fix relative paths for logo if inside pages directory
-                    if (isPagesDir) {
-                        const logoImg = sidebarContainer.querySelector('.logo-text img');
-                        if (logoImg && !logoImg.src.includes('../assets/')) {
-                            logoImg.src = '../assets/logo.png';
-                        }
-
-                        // Highlight active Emergency tab
-                        const tabs = sidebarContainer.querySelectorAll('.tab');
-                        tabs.forEach(tab => {
-                            tab.classList.remove('tab-active');
-                            if (tab.getAttribute('data-page') === 'emergency') {
-                                tab.classList.add('tab-active');
-                            }
-                        });
-                    }
-                }
-            })
-            .catch(err => console.error("Error loading sidebar component:", err));
-    </script>
+    
     
     <script type="module" src="../js/emergencyPage.js"></script>
+    <script src="../js/pagesSidebar.js"></script>
     <script type="module" src="../components/sidebar.js"></script>
 </body>
 </html>

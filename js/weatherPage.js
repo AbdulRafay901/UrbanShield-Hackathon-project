@@ -1,5 +1,6 @@
 import { WEATHER_API_KEY } from "../config.js";
 
+
 // DOM Elements
 const locationNameEl = document.getElementById("weatherLocationName");
 const dateStrEl = document.getElementById("weatherDateStr");

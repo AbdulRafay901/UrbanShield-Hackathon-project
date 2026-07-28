@@ -6,23 +6,99 @@ import { fetchNearbyPlaces } from "./nearbyPlaces.js";
 import { fetchChartData } from "./todayOverview.js";
 
 
+// Search bar 
+
+const searchInput = document.querySelector(".search-container input");
+
+searchInput.addEventListener("keypress", async (e) => {
+
+    if (e.key !== "Enter") return;
+
+    const city = searchInput.value.trim();
+
+    if (!city) return;
+
+    searchCity(city);
+
+});
+
+
+const searchCity = async (city) => {
+
+    try {
+
+        const res = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}&limit=1`
+        );
+
+        const data = await res.json();
+
+        if (!data.length) {
+            alert("City not found");
+            return;
+        }
+
+        const lat = data[0].lat;
+        const lon = data[0].lon;
+
+        location_name.textContent = `${data[0].display_name}`;
+
+        fetchWeatherData(lat, lon);
+        fetchAirData(lat, lon);
+        fetchUvData(lat, lon);
+        fetchNearbyPlaces(lat, lon);
+        fetchChartData(lat, lon);
+
+        searchInput.value = "";
+
+    } catch (err) {
+
+        console.log(err);
+
+    }
+
+};
+
+
 // SIde Bar
 
 
+const sidebarload = async () => {
 
-fetch('components/sidebar.html')
-    .then(response => response.text())
-    .then(data => {
+  const res = await fetch('components/sidebar.html')
+
+  const data = await res.text()
+    
         const sidebarContainer = document.getElementById("sidebarComponent");
         if (sidebarContainer) {
             sidebarContainer.innerHTML = data;
-        }
-    })
-    .catch(err => console.error("Error loading sidebar component:", err));
+
+            loadSidebar()
+        }    
+
+}
+
+sidebarload()
+
+    function loadSidebar(){
+        const scoreElement = document.querySelector("#safetyScoreValue");
+        const zoneText = document.querySelector(".safety-zone p");
+        const zoneIcon = document.querySelector(".safety-zone i");
+        const safeyCircle = document.querySelector(".safety-score .circle")
+
+        let safetyScore = JSON.parse(localStorage.getItem("safetyscore"));
+    
+        scoreElement.textContent = safetyScore.val
+        zoneText.textContent = safetyScore.text
+        zoneIcon.className = safetyScore.icon
+        safeyCircle.classList.add(safetyScore.color)
+    }
 
     const toggleFill = document.querySelector("#fill");
     const toggleLine = document.querySelector("#line")
     const sidebar = document.querySelector("#sidebarComponent");
+
+
  
 
 

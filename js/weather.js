@@ -1,9 +1,9 @@
 
-
-
 import { WEATHER_API_KEY } from "../config.js";
 import { weatherTips, clearSafetyTips } from "../js/safetyTips.js";
 import { updateWeatherScore } from "../components/sidebar.js";
+
+
 
 
 // Weather Api ------------------- Start
@@ -24,17 +24,24 @@ const elements = {
     mini_expected: document.querySelector(".weather-mini-card div .text-muted"),
     mini_description: document.querySelector(".weather-mini-card .mb-0"),   
 // Mini Cards Elements ------------ End
+
+   loading: document.querySelector(".weather-loading")
+
+    
 };
 
+
+
+
+
 export const fetchWeatherData = async (lat, lon) => {
+
     try {
         
         const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`;
 
         const res = await fetch(url);
-        const forecastData = await res.json();
-
-        
+        const forecastData = await res.json();        
         const current = forecastData.list[0];
 
         const temp = current.main.temp;
@@ -130,5 +137,6 @@ export const fetchWeatherData = async (lat, lon) => {
 
     } catch (error) {
         console.log(error);
-    }
+        
+    } 
 }

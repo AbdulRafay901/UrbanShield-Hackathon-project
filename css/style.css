@@ -198,7 +198,7 @@ body {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: conic-gradient(var(--success) 40%, var(--border) 0);
+    background: conic-gradient(var(--border) 40%, var(--border) 0);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -298,11 +298,11 @@ body {
 @property --aqi-val { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
 
 .air-level-1 { color: #10B981 !important; }
-.air-circle-1 { --aqi-val: 20%; background: conic-gradient(#10B981 var(--aqi-val), var(--border) 0); }
+.air-circle-1 { --aqi-val: 20%; background: conic-gradient(#10B981 var(--aqi-val), var(--border) 0) !important}
 .air-card-1 { background: linear-gradient(to right, rgba(16, 185, 129, 0.15) 0%, var(--bg-card) 90%) !important; }
 
 .air-level-2 { color: #84CC16 !important; }
-.air-circle-2 { --aqi-val: 40%; background: conic-gradient(#84CC16 var(--aqi-val), var(--border) 0); }
+.air-circle-2 { --aqi-val: 40%; background: conic-gradient(#84CC16 var(--aqi-val), var(--border) 0) }
 .air-card-2 { background: linear-gradient(to right, rgba(132, 204, 22, 0.15) 0%, var(--bg-card) 90%) !important; }
 
 .air-level-3 { color: #F59E0B !important; }
