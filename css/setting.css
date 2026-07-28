@@ -1,0 +1,111 @@
+/* ============================================================
+   Settings Page - UrbanShield Dark Theme & Responsive CSS
+   ============================================================ */
+
+.settings-card {
+    background: #121A2D;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.settings-section-title {
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Row Item */
+.settings-row, 
+.settings-action-row {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.2s ease;
+}
+
+.settings-card .settings-row:last-child,
+.settings-card .settings-action-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.settings-action-row:hover {
+    padding-left: 0.25rem;
+}
+
+.settings-label {
+    color: #E2E8F0;
+    font-size: 0.92rem;
+    font-weight: 500;
+}
+
+/* Custom Styled Dropdowns */
+.settings-select {
+    width: auto !important;
+    min-width: 85px;
+    background-color: #1A243B !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    padding: 0.3rem 1.8rem 0.3rem 0.75rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.settings-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25) !important;
+    border-color: #2563EB !important;
+}
+
+/* Custom Styled Toggle Switches */
+.settings-switch {
+    width: 2.75em !important;
+    height: 1.4em !important;
+    background-color: #1A243B !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    cursor: pointer;
+}
+
+.settings-switch:checked {
+    background-color: #2563EB !important;
+    border-color: #2563EB !important;
+}
+
+.settings-switch:focus {
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25) !important;
+}
+
+/* ============================================================
+   RESPONSIVE MEDIA QUERIES
+   ============================================================ */
+
+/* Mobiles (<= 576px) */
+@media (max-width: 576px) {
+    .settings-card {
+        padding: 1rem;
+    }
+
+    .settings-section-title {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .settings-label {
+        font-size: 0.85rem;
+    }
+
+    .settings-select {
+        font-size: 0.8rem !important;
+        padding: 0.25rem 1.6rem 0.25rem 0.6rem !important;
+    }
+
+    .settings-switch {
+        width: 2.4em !important;
+        height: 1.25em !important;
+    }
+}

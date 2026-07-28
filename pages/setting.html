@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - UrbanShield</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../components/sidebar.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/setting.css">
+</head>
+<body>
+
+    <div class="dashboard-layout d-flex">
+        <!-- Sidebar Container -->
+        <div id="sidebarComponent"></div>
+
+        <!-- MAIN SETTINGS CONTENT -->
+        <div class="main-content flex-grow-1 p-3 p-md-4">
+            
+            <!-- Topbar / Header -->
+            <header class="topbar d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="t d-lg-none">
+                        <i class="ri-menu-line" id="fill"></i>
+                    </div>
+                    <a href="../index.html" class="alerts-back-btn text-decoration-none" title="Back to Dashboard">
+                        <i class="ri-arrow-left-s-line fs-4"></i>
+                    </a>
+                    <h5 class="alerts-header-title mb-0 fw-bold">Settings</h5>
+                </div>
+
+                <div class="user-actions d-flex align-items-center gap-3">
+                    <div class="notification-btn position-relative">
+                        <i class="ri-notification-3-line fs-5"></i>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Title -->
+            <div class="mb-4">
+                <h4 class="fw-bold mb-1">Preferences & App Settings</h4>
+                <p class="text-muted small">Manage your units, notifications, and application preferences.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-8 col-xl-6">
+                    
+                    <!-- SECTION 1: GENERAL -->
+                    <div class="settings-card mb-4">
+                        <h6 class="settings-section-title">General</h6>
+
+                        <!-- Temperature Unit -->
+                        <div class="settings-row d-flex align-items-center justify-content-between">
+                            <span class="settings-label">Temperature Unit</span>
+                            <select id="tempUnitSelect" class="form-select settings-select">
+                                <option value="metric">°C</option>
+                                <option value="imperial">°F</option>
+                            </select>
+                        </div>
+
+                        <!-- Wind Speed Unit -->
+                        <div class="settings-row d-flex align-items-center justify-content-between">
+                            <span class="settings-label">Wind Speed Unit</span>
+                            <select id="windUnitSelect" class="form-select settings-select">
+                                <option value="kmh">km/h</option>
+                                <option value="mph">mph</option>
+                            </select>
+                        </div>
+
+                        <!-- Dark Mode Toggle -->
+                        <div class="settings-row d-flex align-items-center justify-content-between">
+                            <span class="settings-label">Dark Mode</span>
+                            <div class="form-check form-switch m-0 p-0">
+                                <input class="form-check-input settings-switch" type="checkbox" id="darkModeToggle" checked>
+                            </div>
+                        </div>
+
+                        <!-- Notifications Toggle -->
+                        <div class="settings-row d-flex align-items-center justify-content-between">
+                            <span class="settings-label">Notifications</span>
+                            <div class="form-check form-switch m-0 p-0">
+                                <input class="form-check-input settings-switch" type="checkbox" id="notificationsToggle" checked>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: OTHER -->
+                    <div class="settings-card">
+                        <h6 class="settings-section-title">Other</h6>
+
+                        <!-- Change Location -->
+                        <a href="../index.html" class="settings-action-row d-flex align-items-center justify-content-between text-decoration-none">
+                            <span class="settings-label">Change Location</span>
+                            <i class="ri-arrow-right-s-line fs-5 text-muted"></i>
+                        </a>
+
+                        <!-- Manage Favorites -->
+                        <a href="favorites.html" class="settings-action-row d-flex align-items-center justify-content-between text-decoration-none">
+                            <span class="settings-label">Manage Favorites</span>
+                            <i class="ri-arrow-right-s-line fs-5 text-muted"></i>
+                        </a>
+
+                        <!-- Clear Search History -->
+                        <div id="clearHistoryBtn" class="settings-action-row d-flex align-items-center justify-content-between" style="cursor: pointer;">
+                            <span class="settings-label">Clear Search History</span>
+                            <i class="ri-arrow-right-s-line fs-5 text-muted"></i>
+                        </div>
+
+                        <!-- About UrbanShield -->
+                        <div id="aboutModalBtn" class="settings-action-row d-flex align-items-center justify-content-between" style="cursor: pointer;">
+                            <span class="settings-label">About UrbanShield</span>
+                            <i class="ri-arrow-right-s-line fs-5 text-muted"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Feedback Toast Notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+        <div id="settingsToast" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                    Settings updated successfully.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+
+    <!-- JS Logic Link -->
+    <script type="module" src="../js/settings.js"></script>
+</body>
+</html>

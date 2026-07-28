@@ -23,6 +23,8 @@ document.addEventListener("click", (e) => {
         window.location.href = isPagesDir ? "analyticsPage.html" : "pages/analyticsPage.html";
     } else if (page === "alerts") {
         window.location.href = isPagesDir ? "alertsPage.html" : "pages/alertsPage.html";
+    } else if (page === "settings") {
+        window.location.href = isPagesDir ? "setting.html" : "pages/setting.html";
     }
 });
 
