@@ -1,0 +1,3 @@
+export const WEATHER_API_KEY = "c6fb2567ff2478f8635ca6d0767f4765"
+export const AIR_API_KEY = "3d615b57dfa528797c069c5b30279392b0aebd64";
+export const GEMINI_API_KEY = "AQ.Ab8RN6L_x2XSuoWHSIa2QOjQVnPcrafykahczhOJ_OJvK8kqGA"
