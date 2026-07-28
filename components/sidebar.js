@@ -158,7 +158,7 @@ function calculate() {
 
     localStorage.setItem('safetyscore', JSON.stringify(updatedSafetyScore));
 
-    loadSidebar()
+    
 
 
 
