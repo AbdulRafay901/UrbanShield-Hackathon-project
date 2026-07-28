@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality - UrbanShield</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../components/siderbar.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/airQualityPage.css">
+</head>
+<body>
+
+    <div class="dashboard-layout d-flex">
+        <!-- Sidebar Container -->
+        <div id="sidebarComponent"></div>
+
+        <!-- MAIN AIR QUALITY CONTENT -->
+        <div class="main-content flex-grow-1">
+            
+            <!-- Topbar / Header -->
+            <header class="topbar d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="t d-lg-none">
+                        <i class="ri-menu-line" id="fill"></i>
+                    </div>
+                    <a href="../index.html" class="aqi-back-btn" title="Back to Dashboard">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                </div>
+
+                <div class="aqi-location-header">
+                    <h5 id="aqiLocationName">Detecting location...</h5>
+                    <small id="aqiDateStr">Today</small>
+                </div>
+                
+                <div class="user-actions d-flex align-items-center gap-3">
+                    <div class="notification-btn">
+                        <i class="ri-notification-3-line"></i>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Grid Row -->
+            <div class="row g-4 mb-4">
+                
+                <!-- Main AQI Hero Card -->
+                <div class="col-12">
+                    <div id="aqiHeroCard" class="aqi-hero-card">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-4">
+                            <div>
+                                <div class="d-flex align-items-baseline gap-2">
+                                    <h1 id="aqiMainVal" class="aqi-main-val">--</h1>
+                                    <span class="aqi-tag-label">AQI</span>
+                                </div>
+                                <h4 id="aqiStatusTitle" class="aqi-status-title">Loading...</h4>
+                                <p id="aqiStatusDesc" class="aqi-status-desc">Fetching air quality index data...</p>
+                            </div>
+                            <div>
+                                <img src="../assets/cloud.png" class="aqi-hero-img" alt="Air Quality Cloud">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pollutants Grid -->
+                <div class="col-12">
+                    <div class="row g-3">
+                        <!-- PM2.5 -->
+                        <div class="col-6 col-md-4">
+                            <div class="pollutant-card">
+                                <div class="pollutant-name">PM2.5</div>
+                                <div class="d-flex align-items-baseline">
+                                    <h5 id="valPM25" class="pollutant-val">--</h5>
+                                    <span class="pollutant-unit">µg/m³</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PM10 -->
+                        <div class="col-6 col-md-4">
+                            <div class="pollutant-card">
+                                <div class="pollutant-name">PM10</div>
+                                <div class="d-flex align-items-baseline">
+                                    <h5 id="valPM10" class="pollutant-val">--</h5>
+                                    <span class="pollutant-unit">µg/m³</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- O3 -->
+                        <div class="col-6 col-md-4">
+                            <div class="pollutant-card">
+                                <div class="pollutant-name">O3</div>
+                                <div class="d-flex align-items-baseline">
+                                    <h5 id="valO3" class="pollutant-val">--</h5>
+                                    <span class="pollutant-unit">µg/m³</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CO -->
+                        <div class="col-6 col-md-4">
+                            <div class="pollutant-card">
+                                <div class="pollutant-name">CO</div>
+                                <div class="d-flex align-items-baseline">
+                                    <h5 id="valCO" class="pollutant-val">--</h5>
+                                    <span class="pollutant-unit">mg/m³</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NO2 -->
+                        <div class="col-6 col-md-4">
+                            <div class="pollutant-card">
+                                <div class="pollutant-name">NO2</div>
+                                <div class="d-flex align-items-baseline">
+                                    <h5 id="valNO2" class="pollutant-val">--</h5>
+                                    <span class="pollutant-unit">µg/m³</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SO2 -->
+                        <div class="col-6 col-md-4">
+                            <div class="pollutant-card">
+                                <div class="pollutant-name">SO2</div>
+                                <div class="d-flex align-items-baseline">
+                                    <h5 id="valSO2" class="pollutant-val">--</h5>
+                                    <span class="pollutant-unit">µg/m³</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Health Advice Card -->
+                <div class="col-12">
+                    <div class="health-advice-card d-flex justify-content-between align-items-center gap-3">
+                        <div>
+                            <h6>Health Advice</h6>
+                            <p id="aqiAdviceText">Air quality is satisfactory and poses little or no risk.</p>
+                        </div>
+                        <div class="advice-mask-icon">
+                            <i class="ri-surgical-mask-line"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Load Sidebar dynamically with relative path support
+        const isPagesDir = window.location.pathname.includes('/pages/');
+        const sidebarPath = isPagesDir ? '../components/sidebar.html' : 'components/sidebar.html';
+
+        fetch(sidebarPath)
+            .then(res => res.text())
+            .then(data => {
+                const sidebarContainer = document.getElementById("sidebarComponent");
+                if (sidebarContainer) {
+                    sidebarContainer.innerHTML = data;
+
+                    // Fix relative paths for logo if inside pages directory
+                    if (isPagesDir) {
+                        const logoImg = sidebarContainer.querySelector('.logo-text img');
+                        if (logoImg && !logoImg.src.includes('../assets/')) {
+                            logoImg.src = '../assets/logo.png';
+                        }
+
+                        // Highlight active Air Quality tab
+                        const tabs = sidebarContainer.querySelectorAll('.tab');
+                        tabs.forEach(tab => {
+                            tab.classList.remove('tab-active');
+                            if (tab.getAttribute('data-page') === 'air-quality') {
+                                tab.classList.add('tab-active');
+                            }
+                        });
+                    }
+                }
+            })
+            .catch(err => console.error("Error loading sidebar component:", err));
+    </script>
+    
+    <script type="module" src="../js/airQualityPage.js"></script>
+    <script type="module" src="../components/sidebar.js"></script>
+</body>
+</html>
