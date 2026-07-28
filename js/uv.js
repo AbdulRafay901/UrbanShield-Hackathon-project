@@ -35,35 +35,35 @@ export const fetchUvData = async (lat, lon) => {
             adviceText = "Low UV. Safe to enjoy outdoors";
             miniTip = "No protection needed";
             iconClass = "ri-sun-line";
-            level = 1;
+            uvCircle.classList.add('air-circle-1')
         } 
         else if (uvIndex <= 5) {
             statusText = "Moderate";
             adviceText = "Wear sunglasses and SPF 30+ sunscreen";
             miniTip = "Wear sunscreen & shades";
             iconClass = "ri-sun-cloudy-line";
-            level = 2;
+            uvCircle.classList.add('air-circle-2')
         } 
         else if (uvIndex <= 7) {
             statusText = "High";
             adviceText = "High UV. Apply sunscreen, wear hat"; 
             miniTip = "Use SPF 30+ & wear hat";
             iconClass = "ri-sun-fill";
-            level = 3;
+            uvCircle.classList.add('air-circle-3')
         } 
         else if (uvIndex <= 10) {
             statusText = "Very High";
             adviceText = "Very high UV. Avoid direct sun.";
             miniTip = "Avoid direct peak sun";
             iconClass = "ri-alarm-warning-fill";
-            level = 4;
+            uvCircle.classList.add('air-circle-4')
         } 
         else {
             statusText = "Extreme";
             adviceText = "Extreme UV! Stay in the shade!";
             miniTip = "Danger! Stay indoors";
             iconClass = "ri-fire-fill";
-            level = 5;
+            uvCircle.classList.add('air-circle-5')
         }
 
 

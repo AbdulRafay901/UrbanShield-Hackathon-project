@@ -1,6 +1,5 @@
-.sidebar {
+.sidebar{
     width: 240px;
-    min-width: 240px;
     height: 100vh;
     background-color: var(--bg-sidebar);
     padding: 24px 16px;
@@ -12,8 +11,9 @@
     top: 0;
     overflow-y: auto;
     z-index: 1000;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
 }
+
 
 /* Hide scrollbar for sidebar */
 .sidebar::-webkit-scrollbar {
@@ -206,16 +206,48 @@
 }
 
 /* Mobile Sidebar Styles */
-@media (max-width: 991.98px) {
-    .sidebar {
+@media (max-width: 991.98px){
+    #sidebarComponent {
         position: fixed;
-        left: -260px;
+        left: -500px;
         top: 0;
         bottom: 0;
         z-index: 1050;
         box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
     }
+    .sidebar-js{
+        left: 0 !important;
+        
+    }
     .sidebar.mobile-show {
         transform: translateX(260px);
+    }
+
+    .logo-text {
+       gap: 5px;
+       position: relative;
+    }
+
+    .logo-text .text h4 {
+       margin: 0 0 5px 0 ;
+       font-size: 15px;
+    }
+    .logo-text .text p {
+       margin: 0;
+       font-size: 10px;
+       color: var(--text-light);
+    }
+    .logo-text .t{
+        position: absolute;
+        right: 0;
+    }
+}
+
+@media (max-width: 375px){
+    .sidebar{
+        width: 230px;
+    }
+    .logo-text .t i{
+        font-size: 18px !important;
     }
 }

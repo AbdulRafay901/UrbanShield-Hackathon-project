@@ -5,6 +5,45 @@ import { fetchUvData } from "./uv.js";
 import { fetchNearbyPlaces } from "./nearbyPlaces.js";
 import { fetchChartData } from "./todayOverview.js";
 
+
+// SIde Bar
+
+
+
+fetch('components/sidebar.html')
+    .then(response => response.text())
+    .then(data => {
+        const sidebarContainer = document.getElementById("sidebarComponent");
+        if (sidebarContainer) {
+            sidebarContainer.innerHTML = data;
+        }
+    })
+    .catch(err => console.error("Error loading sidebar component:", err));
+
+    const toggleFill = document.querySelector("#fill");
+    const toggleLine = document.querySelector("#line")
+    const sidebar = document.querySelector("#sidebarComponent");
+ 
+
+
+toggleFill.addEventListener("click", () => {
+
+    toggleFill.classList.add("fill-js")
+    sidebar.classList.add("sidebar-js")
+    
+
+})
+
+window.addEventListener("click", ((e) => {
+    if(e.target.id == "line"){
+    toggleFill.classList.remove("fill-js")
+    sidebar.classList.remove("sidebar-js")
+    }
+}))
+
+
+// SIde Bar
+
 let location_name = document.querySelector(".location-name");
 
 

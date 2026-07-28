@@ -1,24 +1,19 @@
 
-fetch('components/sidebar.html')
-    .then(response => response.text())
-    .then(data => {
-        const sidebarContainer = document.getElementById("sidebarComponent");
-        if (sidebarContainer) {
-            sidebarContainer.innerHTML = data;
-            initSidebarNavigation();
-        }
-    })
-    .catch(err => console.error("Error loading sidebar component:", err));
+
 
 // Initialize Sidebar Tab Click Handlers
 
 
 // Responsive Sidebar ------------ Start
 
+
+
+
+
 // Responsive Sidebar ------------ End
 
 
-window.initSidebarNavigation = initSidebarNavigation;
+
 
 
 
