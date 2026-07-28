@@ -155,7 +155,6 @@
 .safety-circle-90{
      --aqi-val: 100%; background: conic-gradient(var(--success) var(--aqi-val), var(--border) 0) !important; 
 }
-
 .safety-circle-75{
      --aqi-val: 80%; background: conic-gradient(var(--success) var(--aqi-val), var(--border) 0) !important; 
 }

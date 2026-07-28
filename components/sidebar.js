@@ -1,7 +1,6 @@
 
 
-import { loadSidebar } from "../js/pagesSidebar.js";
-
+import { loadSidebar } from "../js/app.js";
 // Initialize Sidebar Tab Click Handlers
 document.addEventListener("click", (e) => {
     const tab = e.target.closest(".tab");
@@ -151,10 +150,10 @@ function calculate() {
     const zone = ZONES.find(z => score >= z.min);
 
     const updatedSafetyScore = {
-     val: score,
-     text: zone.text,
-     icon: `${zone.icon} me-1 ${zone.color} fs-6`,
-     color: zone.classList
+      val: score,
+      text: zone.text,
+      icon: `${zone.icon} me-1 ${zone.color} fs-6`,
+      color: zone.classList
     };
 
     localStorage.setItem('safetyscore', JSON.stringify(updatedSafetyScore));

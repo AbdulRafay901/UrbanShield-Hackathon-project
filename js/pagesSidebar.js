@@ -13,22 +13,9 @@ const sidebarload = async () => {
                             logoImg.src = '../assets/logo.png';
                         }            
 
-            loadSidebar()
+            
         }    
 }
 
 sidebarload()
 
-  export function loadSidebar(){
-        const scoreElement = document.querySelector("#safetyScoreValue");
-        const zoneText = document.querySelector(".safety-zone p");
-        const zoneIcon = document.querySelector(".safety-zone i");
-        const safeyCircle = document.querySelector(".safety-score .circle")
-
-        let safetyScore = JSON.parse(localStorage.getItem("safetyscore"));
-    
-        scoreElement.textContent = safetyScore.val
-        zoneText.textContent = safetyScore.text
-        zoneIcon.className = safetyScore.icon
-        safeyCircle.classList.add(safetyScore.color)
-    }

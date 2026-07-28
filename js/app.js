@@ -6,6 +6,7 @@ import { fetchNearbyPlaces } from "./nearbyPlaces.js";
 import { fetchChartData } from "./todayOverview.js";
 
 
+
 // Search bar 
 
 const searchInput = document.querySelector(".search-container input");
@@ -76,27 +77,41 @@ const sidebarload = async () => {
         if (sidebarContainer) {
             sidebarContainer.innerHTML = data;
 
-            loadSidebar()
+            
         }    
 
 }
 
 sidebarload()
 
-    function loadSidebar(){
 
-        const scoreElement = document.querySelector("#safetyScoreValue");
-        const zoneText = document.querySelector(".safety-zone p");
-        const zoneIcon = document.querySelector(".safety-zone i");
-        const safeyCircle = document.querySelector(".safety-score .circle")
+        
 
-        let safetyScore = JSON.parse(localStorage.getItem("safetyscore"));
-    
-        scoreElement.textContent = safetyScore.val
-        zoneText.textContent = safetyScore.text
-        zoneIcon.className = safetyScore.icon
-        safeyCircle.classList.add(safetyScore.color)
-    }
+   export function loadSidebar(){
+
+    const scoreElement = document.querySelector("#safetyScoreValue");
+    const zoneText = document.querySelector(".safety-zone p");
+    const zoneIcon = document.querySelector(".safety-zone i");
+    const safeyCircle = document.querySelector(".safety-score .circle");
+
+    const safetyScore = JSON.parse(localStorage.getItem("safetyscore"));
+
+    if(!safetyScore) return;
+
+    scoreElement.textContent = safetyScore.val;
+    zoneText.textContent = safetyScore.text;
+    zoneIcon.className = safetyScore.icon;
+
+    safeyCircle.classList.remove(
+        "safety-circle-90",
+        "safety-circle-75",
+        "safety-circle-60",
+        "safety-circle-40",
+        "safety-circle-0"
+    );
+
+    safeyCircle.classList.add(safetyScore.color);
+}
 
     const toggleFill = document.querySelector("#fill");
     const toggleLine = document.querySelector("#line")
