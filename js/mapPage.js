@@ -105,38 +105,87 @@ function initMapAndFetchPlaces() {
 }
 
 // Fetch places using Overpass API
+// Geoapify Places API
 async function fetchNearbyPlacesFromAPI() {
     const { lat, lon } = userCoords;
-    const query = `[out:json][timeout:10];
-        (node["amenity"~"hospital|pharmacy|police|fuel|atm"](around:4000, ${lat}, ${lon}););
-        out body 12;`;
+
+    const API_KEY = "ca4b98b697334b8db96edb47ca6ef377";
+
+    const categories = [
+        "healthcare.hospital",
+        "healthcare.pharmacy",
+        "service.police",
+        "service.financial.atm",
+        "service.vehicle.fuel"
+    ].join(",");
+
+    const url =
+        `https://api.geoapify.com/v2/places` +
+        `?categories=${categories}` +
+        `&filter=circle:${lon},${lat},4000` +
+        `&limit=50` +
+        `&apiKey=${API_KEY}`;
 
     try {
-        const res = await fetch(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`);
+        const res = await fetch(url);
+
+        if (!res.ok) throw new Error("Geoapify request failed");
+
         const data = await res.json();
 
-        if (data && data.elements && data.elements.length > 0) {
-            allPlacesData = data.elements.map(place => {
-                const type = place.tags?.amenity || "hospital";
-                const config = CATEGORY_CONFIG[type] || CATEGORY_CONFIG.hospital;
-                const dist = calcDistance(lat, lon, place.lat, place.lon);
+        if (!data.features?.length) {
+            generateFallbackPlaces();
+            renderMapPins();
+            renderPlacesList();
+            return;
+        }
+
+        allPlacesData = data.features
+            .map(feature => {
+
+                const p = feature.properties;
+
+                let type = null;
+
+                if (p.categories.includes("healthcare.hospital"))
+                    type = "hospital";
+
+                else if (p.categories.includes("healthcare.pharmacy"))
+                    type = "pharmacy";
+
+                else if (p.categories.includes("service.police"))
+                    type = "police";
+
+                else if (p.categories.includes("service.vehicle.fuel"))
+                    type = "fuel";
+
+                else if (p.categories.includes("service.financial.atm"))
+                    type = "atm";
+
+                if (!type) return null;
+
                 return {
-                    id: place.id,
-                    name: place.tags.name || config.label,
-                    type: type,
-                    lat: place.lat,
-                    lon: place.lon,
-                    distance: parseFloat(dist),
-                    ...config
+                    id: p.place_id,
+                    name: p.name || CATEGORY_CONFIG[type].label,
+                    type,
+                    lat: p.lat,
+                    lon: p.lon,
+                    distance: parseFloat(
+                        calcDistance(lat, lon, p.lat, p.lon)
+                    ),
+                    ...CATEGORY_CONFIG[type]
                 };
-            });
-            // Sort by distance
-            allPlacesData.sort((a, b) => a.distance - b.distance);
-        } else {
+
+            })
+            .filter(Boolean)
+            .sort((a, b) => a.distance - b.distance);
+
+        if (!allPlacesData.length) {
             generateFallbackPlaces();
         }
+
     } catch (err) {
-        console.warn("Overpass API error, generating fallback nearby places:", err);
+        console.error("Geoapify Error:", err);
         generateFallbackPlaces();
     }
 
