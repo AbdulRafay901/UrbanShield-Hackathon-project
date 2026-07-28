@@ -17,6 +17,8 @@ document.addEventListener("click", (e) => {
         window.location.href = isPagesDir ? "airQualityPage.html" : "pages/airQualityPage.html";
     } else if (page === "map") {
         window.location.href = isPagesDir ? "mapPage.html" : "pages/mapPage.html";
+    } else if (page === "emergency") {
+        window.location.href = isPagesDir ? "emergencyPage.html" : "pages/emergencyPage.html";
     }
 });
 

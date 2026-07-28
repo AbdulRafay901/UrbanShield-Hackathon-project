@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Contacts - UrbanShield</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../components/siderbar.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/emergencyPage.css">
+</head>
+<body>
+
+    <div class="dashboard-layout d-flex">
+        <!-- Sidebar Container -->
+        <div id="sidebarComponent"></div>
+
+        <!-- MAIN EMERGENCY CONTENT -->
+        <div class="main-content flex-grow-1">
+            
+            <!-- Topbar / Header -->
+            <header class="topbar d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="t d-lg-none">
+                        <i class="ri-menu-line" id="fill"></i>
+                    </div>
+                    <a href="../index.html" class="emergency-back-btn" title="Back to Dashboard">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                    <div class="emergency-header-info">
+                        <h5>Emergency Contacts</h5>
+                        <small>One tap to call for help</small>
+                    </div>
+                </div>
+
+                <div class="user-actions d-flex align-items-center gap-3">
+                    <div class="notification-btn">
+                        <i class="ri-notification-3-line"></i>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Grid Row -->
+            <div class="row g-4 mb-4">
+                
+                <!-- 4 Emergency Hotline Cards Grid (2x2) -->
+                <div class="col-12">
+                    <div class="row g-3">
+                        <!-- Ambulance -->
+                        <div class="col-6">
+                            <a href="tel:112" class="emergency-call-card card-ambulance">
+                                <div class="emergency-icon-box bg-danger-soft text-danger">
+                                    <i class="ri-hospital-line"></i>
+                                </div>
+                                <div>
+                                    <div class="emergency-card-title">Ambulance</div>
+                                    <div class="emergency-card-number">112</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Police -->
+                        <div class="col-6">
+                            <a href="tel:15" class="emergency-call-card card-police">
+                                <div class="emergency-icon-box bg-primary-soft text-primary">
+                                    <i class="ri-police-car-line"></i>
+                                </div>
+                                <div>
+                                    <div class="emergency-card-title">Police</div>
+                                    <div class="emergency-card-number">15</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Fire Brigade -->
+                        <div class="col-6">
+                            <a href="tel:16" class="emergency-call-card card-fire">
+                                <div class="emergency-icon-box bg-warning-soft text-warning">
+                                    <i class="ri-fire-line"></i>
+                                </div>
+                                <div>
+                                    <div class="emergency-card-title">Fire Brigade</div>
+                                    <div class="emergency-card-number">16</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Flood Helpline -->
+                        <div class="col-6">
+                            <a href="tel:1121" class="emergency-call-card card-flood">
+                                <div class="emergency-icon-box bg-success-soft text-success">
+                                    <i class="ri-flood-line"></i>
+                                </div>
+                                <div>
+                                    <div class="emergency-card-title">Flood Helpline</div>
+                                    <div class="emergency-card-number">1121</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Checklist Section -->
+                <div class="col-12">
+                    <div class="checklist-card">
+                        <h6 class="checklist-header">Emergency Checklist</h6>
+
+                        <!-- Item 1: Torch -->
+                        <div class="checklist-item" data-id="torch">
+                            <div class="checklist-item-left">
+                                <i class="ri-flashlight-line"></i>
+                                <span>Torch</span>
+                            </div>
+                            <div class="custom-chk-box"></div>
+                        </div>
+
+                        <!-- Item 2: Water -->
+                        <div class="checklist-item" data-id="water">
+                            <div class="checklist-item-left">
+                                <i class="ri-drop-line"></i>
+                                <span>Water</span>
+                            </div>
+                            <div class="custom-chk-box"></div>
+                        </div>
+
+                        <!-- Item 3: Medicines -->
+                        <div class="checklist-item" data-id="medicines">
+                            <div class="checklist-item-left">
+                                <i class="ri-capsule-line"></i>
+                                <span>Medicines</span>
+                            </div>
+                            <div class="custom-chk-box"></div>
+                        </div>
+
+                        <!-- Item 4: Power Bank -->
+                        <div class="checklist-item" data-id="powerbank">
+                            <div class="checklist-item-left">
+                                <i class="ri-battery-2-charge-line"></i>
+                                <span>Power Bank</span>
+                            </div>
+                            <div class="custom-chk-box"></div>
+                        </div>
+
+                        <!-- Item 5: Important Documents -->
+                        <div class="checklist-item" data-id="documents">
+                            <div class="checklist-item-left">
+                                <i class="ri-file-text-line"></i>
+                                <span>Important Documents</span>
+                            </div>
+                            <div class="custom-chk-box"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SOS Share Location Action Button -->
+                <div class="col-12">
+                    <button id="btnShareLocation" class="share-location-btn">
+                        <i class="ri-map-pin-fill"></i>
+                        <span>Share My Location</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Load Sidebar dynamically with relative path support
+        const isPagesDir = window.location.pathname.includes('/pages/');
+        const sidebarPath = isPagesDir ? '../components/sidebar.html' : 'components/sidebar.html';
+
+        fetch(sidebarPath)
+            .then(res => res.text())
+            .then(data => {
+                const sidebarContainer = document.getElementById("sidebarComponent");
+                if (sidebarContainer) {
+                    sidebarContainer.innerHTML = data;
+
+                    // Fix relative paths for logo if inside pages directory
+                    if (isPagesDir) {
+                        const logoImg = sidebarContainer.querySelector('.logo-text img');
+                        if (logoImg && !logoImg.src.includes('../assets/')) {
+                            logoImg.src = '../assets/logo.png';
+                        }
+
+                        // Highlight active Emergency tab
+                        const tabs = sidebarContainer.querySelectorAll('.tab');
+                        tabs.forEach(tab => {
+                            tab.classList.remove('tab-active');
+                            if (tab.getAttribute('data-page') === 'emergency') {
+                                tab.classList.add('tab-active');
+                            }
+                        });
+                    }
+                }
+            })
+            .catch(err => console.error("Error loading sidebar component:", err));
+    </script>
+    
+    <script type="module" src="../js/emergencyPage.js"></script>
+    <script type="module" src="../components/sidebar.js"></script>
+</body>
+</html>

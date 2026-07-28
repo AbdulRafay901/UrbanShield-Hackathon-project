@@ -1,0 +1,255 @@
+/* Emergency Page Custom Styles - UrbanShield */
+
+:root {
+    --bg-main: #0B1020;
+    --bg-sidebar: #11182D;
+    --bg-card: #141D34;
+    --border: #242F4A;
+    --primary: #2563EB;
+    --secondary: #5A3BFF;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    --info: #3B82F6;
+    --text: #F5F7FF;
+    --text-light: #9BA8C8;
+}
+
+body {
+    background-color: var(--bg-main);
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Header */
+.emergency-back-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.emergency-back-btn:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+    transform: translateX(-2px);
+}
+
+.emergency-header-info h5 {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.emergency-header-info small {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+/* Emergency Cards Grid */
+.emergency-call-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    min-height: 110px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.emergency-call-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+}
+
+.card-ambulance {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, var(--bg-card) 100%);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+.card-ambulance:hover { border-color: var(--danger); }
+
+.card-police {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, var(--bg-card) 100%);
+    border-color: rgba(37, 99, 235, 0.4);
+}
+.card-police:hover { border-color: var(--primary); }
+
+.card-fire {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, var(--bg-card) 100%);
+    border-color: rgba(245, 158, 11, 0.4);
+}
+.card-fire:hover { border-color: var(--warning); }
+
+.card-flood {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, var(--bg-card) 100%);
+    border-color: rgba(16, 185, 129, 0.4);
+}
+.card-flood:hover { border-color: var(--success); }
+
+.emergency-icon-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.emergency-card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-light);
+    margin: 0 0 2px 0;
+}
+
+.emergency-card-number {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Emergency Checklist */
+.checklist-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+}
+
+.checklist-header {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.checklist-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checklist-item:hover {
+    border-color: var(--primary);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.checklist-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.checklist-item-left i {
+    font-size: 18px;
+    color: var(--text-light);
+}
+
+.checklist-item-left span {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+}
+
+/* Custom Checkbox */
+.custom-chk-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.checklist-item.checked {
+    border-color: var(--success);
+    background: rgba(16, 185, 129, 0.08);
+}
+
+.checklist-item.checked .checklist-item-left span {
+    text-decoration: line-through;
+    color: var(--text-light);
+}
+
+.checklist-item.checked .checklist-item-left i {
+    color: var(--success);
+}
+
+.checklist-item.checked .custom-chk-box {
+    background-color: var(--success);
+    border-color: var(--success);
+    color: #ffffff;
+}
+
+.checklist-item.checked .custom-chk-box::after {
+    content: '✓';
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* Share Location SOS Button */
+.share-location-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    border: none;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 14px 20px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
+    transition: all 0.3s ease;
+}
+
+.share-location-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(239, 68, 68, 0.6);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 767.98px) {
+    .checklist-card {
+        padding: 18px 14px;
+    }
+    
+    .emergency-card-number {
+        font-size: 1.2rem;
+    }
+}
