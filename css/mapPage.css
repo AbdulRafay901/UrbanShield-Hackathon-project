@@ -1,0 +1,276 @@
+/* Map Page Custom Styles - UrbanShield */
+
+:root {
+    --bg-main: #0B1020;
+    --bg-sidebar: #11182D;
+    --bg-card: #141D34;
+    --border: #242F4A;
+    --primary: #2563EB;
+    --secondary: #5A3BFF;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+    --info: #3B82F6;
+    --text: #F5F7FF;
+    --text-light: #9BA8C8;
+}
+
+body {
+    background-color: var(--bg-main);
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Header */
+.map-back-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.map-back-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateX(-2px);
+}
+
+.map-header-title {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Filter Chips Bar */
+.map-filters-bar {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.map-filter-chip {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.map-filter-chip:hover {
+    border-color: var(--primary);
+    color: #ffffff;
+}
+
+.map-filter-chip.active {
+    background: rgba(37, 99, 235, 0.15);
+    border-color: var(--primary);
+    color: #ffffff;
+}
+
+.filter-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-red { background-color: var(--danger); box-shadow: 0 0 8px var(--danger); }
+.dot-green { background-color: var(--success); box-shadow: 0 0 8px var(--success); }
+.dot-blue { background-color: var(--primary); box-shadow: 0 0 8px var(--primary); }
+.dot-purple { background-color: #8B5CF6; box-shadow: 0 0 8px #8B5CF6; }
+.dot-orange { background-color: var(--warning); box-shadow: 0 0 8px var(--warning); }
+
+/* Map Container Card */
+.map-canvas-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.map-viewport {
+    height: 340px;
+    width: 100%;
+    border-radius: 14px;
+    background: #090E1A;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Custom Radar Map Styling */
+.dark-radar-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 70%),
+        linear-gradient(rgba(36, 47, 74, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(36, 47, 74, 0.2) 1px, transparent 1px);
+    background-size: 100% 100%, 25px 25px, 25px 25px;
+    pointer-events: none;
+    z-index: 400;
+}
+
+/* Custom Pulsing Markers */
+.user-pulse-marker {
+    width: 18px;
+    height: 18px;
+    background: var(--primary);
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.user-pulse-marker::before {
+    content: '';
+    position: absolute;
+    top: -16px; left: -16px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    animation: radarPulse 2s infinite ease-out;
+}
+
+@keyframes radarPulse {
+    0% { transform: scale(0.3); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.custom-place-pin {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.custom-place-pin:hover {
+    transform: scale(1.25);
+    z-index: 1000;
+}
+
+/* Nearby Places List */
+.nearby-places-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.place-list-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.place-list-item:hover {
+    border-color: var(--primary);
+    background: rgba(37, 99, 235, 0.08);
+    transform: translateX(4px);
+}
+
+.place-item-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.place-icon-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.place-item-info h6 {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 2px 0;
+}
+
+.place-item-info small {
+    color: var(--text-light);
+    font-size: 11px;
+}
+
+.place-distance {
+    color: var(--text-light);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.view-all-map-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid var(--border);
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    margin-top: 16px;
+}
+
+.view-all-map-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767.98px) {
+    .map-viewport {
+        height: 260px;
+    }
+    
+    .map-canvas-card {
+        padding: 14px;
+    }
+    
+    .place-list-item {
+        padding: 12px 14px;
+    }
+}
