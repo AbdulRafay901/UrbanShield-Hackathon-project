@@ -1,5 +1,6 @@
 
 import { WEATHER_API_KEY } from "../config.js";
+import { uvTips } from "../js/safetyTips.js";
 
 // DOM Elements Selection
 const uvValueElem = document.querySelector(".uv-value"); 
@@ -21,6 +22,7 @@ export const fetchUvData = async (lat, lon) => {
         const data = await res.json();
 
         const uvIndex = Math.round(data.current.uv_index); 
+        uvTips(uvIndex);
 
         let statusText = "";
         let adviceText = ""; 

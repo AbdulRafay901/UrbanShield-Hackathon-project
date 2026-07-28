@@ -2,6 +2,7 @@
 
 
 import { WEATHER_API_KEY } from "../config.js";
+import { weatherTips, clearSafetyTips } from "../js/safetyTips.js";
 
 
 // Weather Api ------------------- Start
@@ -36,7 +37,7 @@ export const fetchWeatherData = async (lat, lon) => {
         const current = forecastData.list[0];
 
         const temp = current.main.temp;
-        const windspeed = current.wind.speed;
+        const windspeed = Math.round(current.wind.speed);
         const name = current.weather[0].main;
         const feels_like = current.main.feels_like;
         const humidity = current.main.humidity;
@@ -103,6 +104,15 @@ export const fetchWeatherData = async (lat, lon) => {
                 elements.weather_img.src = "assets/cloud.png";
             break;
         }
+
+        clearSafetyTips();
+
+        weatherTips(
+            name,
+            temp,
+            humidity,
+            windspeed
+        );
 
         elements.temp.innerHTML = `${temp}<sup style="font-size:37px; margin:0 3px;">°C</sup>`;
         elements.wind.innerHTML = `${windspeed} <span style="font-size:12px;">km/h</span>`;

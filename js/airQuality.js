@@ -2,6 +2,7 @@
 
 import { WEATHER_API_KEY } from "../config.js";
 import { GEMINI_API_KEY } from "../config.js";
+import { airTips } from "../js/safetyTips.js";
 
 
 
@@ -27,6 +28,7 @@ export const fetchAirData = async (lat, lon) => {
         const data = await res.json();
 
         const aqi = data.list[0].main.aqi;
+        airTips(aqi);
         if (element.aqi) element.aqi.textContent = aqi;
 
         const pm25 = data.list[0].components.pm2_5;

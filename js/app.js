@@ -20,10 +20,8 @@ navigator.geolocation.getCurrentPosition(async (position) => {
 
     const data = await res.json();
 
-    console.log(data);
-
     location_name.textContent =
-        `${data.address.city || data.address.town || data.address.village}, ${data.address.state}`;
+        `${data.address.city} ${data.address.state}`;
 
     fetchWeatherData(lat, lon);
     fetchAirData(lat, lon);
@@ -58,8 +56,7 @@ const fetchLocationByIP = async () => {
         fetchNearbyPlaces(lat, lon)
         fetchChartData(lat, lon);
 
-    } catch (err) {
-        
+    } catch (err) {        
         console.error("IP Location Fail:", err);
     }
 }
