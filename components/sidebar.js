@@ -1,5 +1,6 @@
 
 
+import { loadSidebar } from "../js/pagesSidebar.js";
 
 // Initialize Sidebar Tab Click Handlers
 document.addEventListener("click", (e) => {
@@ -158,7 +159,7 @@ function calculate() {
 
     localStorage.setItem('safetyscore', JSON.stringify(updatedSafetyScore));
 
-    
+    loadSidebar()
 
 
 

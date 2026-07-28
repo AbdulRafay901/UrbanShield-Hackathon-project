@@ -1,5 +1,11 @@
 /* Map Page Custom Styles - UrbanShield */
 
+#map{
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
 :root {
     --bg-main: #0B1020;
     --bg-sidebar: #11182D;

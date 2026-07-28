@@ -38,10 +38,12 @@ const searchCity = async (city) => {
             return;
         }
 
+        let CityName = data[0].display_name.split(" ").slice(0,2).join(" ")
+
         const lat = data[0].lat;
         const lon = data[0].lon;
 
-        location_name.textContent = `${data[0].display_name}`;
+        location_name.textContent = `${CityName}`;
 
         fetchWeatherData(lat, lon);
         fetchAirData(lat, lon);
@@ -137,8 +139,10 @@ navigator.geolocation.getCurrentPosition(async (position) => {
 
     const data = await res.json();
 
+    console.log(data.address.city)
+
     location_name.textContent =
-        `${data.address.city} ${data.address.state}`;
+        `${data.address.city}`;
 
     fetchWeatherData(lat, lon);
     fetchAirData(lat, lon);
@@ -160,10 +164,10 @@ const fetchLocationByIP = async () => {
         
         const data = await res.json();
 
-        console.log(data)
+        console.log(data.city)
         
 
-        location_name.textContent = `${data.city}, ${data.regionName}`
+        location_name.textContent = `${data.city}`
         
         const lat = data.location.latitude;
         const lon = data.location.longitude;

@@ -11,24 +11,15 @@ const sidebarload = async () => {
             const logoImg = sidebarContainer.querySelector('.logo-text img');
                         if (logoImg && !logoImg.src.includes('../assets/')) {
                             logoImg.src = '../assets/logo.png';
-                        }
-
-                        const tabs = sidebarContainer.querySelectorAll('.tab');
-                        tabs.forEach(tab => {
-                            tab.classList.remove('tab-active');
-                            tab.addEventListener("click", ((e) => {
-                                e.target.classList.add('tab-active')
-                            }))
-                        });
+                        }            
 
             loadSidebar()
         }    
-
 }
 
 sidebarload()
 
-    function loadSidebar(){
+  export function loadSidebar(){
         const scoreElement = document.querySelector("#safetyScoreValue");
         const zoneText = document.querySelector(".safety-zone p");
         const zoneIcon = document.querySelector(".safety-zone i");
