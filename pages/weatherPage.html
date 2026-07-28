@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather - UrbanShield</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS (Grid & Core) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../components/siderbar.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/weatherPage.css">
+</head>
+<body>
+
+    <div class="dashboard-layout d-flex">
+        <!-- Sidebar Container -->
+        <div id="sidebarComponent"></div>
+
+        <!-- MAIN WEATHER CONTENT -->
+        <div class="main-content flex-grow-1">
+            
+            <!-- Topbar / Header -->
+            <header class="topbar d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="t d-lg-none">
+                        <i class="ri-menu-line" id="fill"></i>
+                    </div>
+                    <a href="../index.html" class="weather-back-btn" title="Back to Dashboard">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                </div>
+
+                <div class="weather-location-header">
+                    <h5 id="weatherLocationName">Detecting location...</h5>
+                    <small id="weatherDateStr">Today</small>
+                </div>
+                
+                <div class="user-actions d-flex align-items-center gap-3">
+                    <div class="notification-btn">
+                        <i class="ri-notification-3-line"></i>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Row Grid -->
+            <div class="row g-4 mb-4">
+                
+                <!-- Hero Weather Card -->
+                <div class="col-12">
+                    <div class="weather-hero-card">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-4">
+                            <div>
+                                <h1 class="weather-main-temp" id="weatherMainTemp">--<span class="deg">°C</span></h1>
+                                <h4 class="weather-cond-title" id="weatherCondTitle">Loading weather...</h4>
+                                <p class="weather-feels-like" id="weatherFeelsLike">Feels like --°C</p>
+                            </div>
+                            <div>
+                                <img id="weatherMainImg" src="../assets/sun.png" class="hero-weather-img" alt="Weather Condition">
+                            </div>
+                        </div>
+
+                        <!-- Details Strip -->
+                        <div class="weather-stats-strip">
+                            <div class="row g-3">
+                                <div class="col-3">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Humidity</span>
+                                        <p class="stat-value" id="weatherHumidity">--%</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Wind</span>
+                                        <p class="stat-value" id="weatherWind">-- km/h</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Pressure</span>
+                                        <p class="stat-value" id="weatherPressure">-- hPa</p>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Visibility</span>
+                                        <p class="stat-value" id="weatherVisibility">-- km</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forecast Section -->
+                <div class="col-12">
+                    <div class="forecast-card-section">
+                        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                            <div class="forecast-tabs">
+                                <button class="forecast-tab-btn active" id="btnHourlyForecast">Hourly Forecast</button>
+                                <button class="forecast-tab-btn" id="btn7DayForecast">7 Day Forecast</button>
+                            </div>
+                        </div>
+
+                        <!-- Scrollable Forecast Container -->
+                        <div id="weatherForecastContainer" class="forecast-scroll-container">
+                            <!-- Populated dynamically by weatherPage.js -->
+                            <div class="text-center w-100 py-3 text-muted">
+                                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                Loading forecast...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Atmospheric Highlights Grid -->
+                <div class="col-12">
+                    <div class="row g-3">
+                        <!-- Sunrise -->
+                        <div class="col-6 col-md-3">
+                            <div class="highlight-card">
+                                <div class="highlight-icon-box bg-warning-soft text-warning">
+                                    <i class="ri-sun-line"></i>
+                                </div>
+                                <div class="highlight-info">
+                                    <h6>Sunrise</h6>
+                                    <p id="weatherSunrise">--:-- AM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sunset -->
+                        <div class="col-6 col-md-3">
+                            <div class="highlight-card">
+                                <div class="highlight-icon-box bg-primary-soft text-primary">
+                                    <i class="ri-moon-clear-line"></i>
+                                </div>
+                                <div class="highlight-info">
+                                    <h6>Sunset</h6>
+                                    <p id="weatherSunset">--:-- PM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cloud Cover -->
+                        <div class="col-6 col-md-3">
+                            <div class="highlight-card">
+                                <div class="highlight-icon-box bg-info-soft text-info">
+                                    <i class="ri-cloud-windy-line"></i>
+                                </div>
+                                <div class="highlight-info">
+                                    <h6>Cloud Cover</h6>
+                                    <p id="weatherCloudCover">--%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chance of Rain -->
+                        <div class="col-6 col-md-3">
+                            <div class="highlight-card">
+                                <div class="highlight-icon-box bg-primary-soft text-primary">
+                                    <i class="ri-drop-line"></i>
+                                </div>
+                                <div class="highlight-info">
+                                    <h6>Chance of Rain</h6>
+                                    <p id="weatherRainChance">--%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Load Sidebar dynamically with relative path support
+        const isPagesDir = window.location.pathname.includes('/pages/');
+        const sidebarPath = isPagesDir ? '../components/sidebar.html' : 'components/sidebar.html';
+
+        fetch(sidebarPath)
+            .then(res => res.text())
+            .then(data => {
+                const sidebarContainer = document.getElementById("sidebarComponent");
+                if (sidebarContainer) {
+                    sidebarContainer.innerHTML = data;
+
+                    // Fix relative paths for logo if inside pages directory
+                    if (isPagesDir) {
+                        const logoImg = sidebarContainer.querySelector('.logo-text img');
+                        if (logoImg && !logoImg.src.includes('../assets/')) {
+                            logoImg.src = '../assets/logo.png';
+                        }
+
+                        // Highlight active Weather tab
+                        const tabs = sidebarContainer.querySelectorAll('.tab');
+                        tabs.forEach(tab => {
+                            tab.classList.remove('tab-active');
+                            if (tab.getAttribute('data-page') === 'weather') {
+                                tab.classList.add('tab-active');
+                            }
+                        });
+                    }
+                }
+            })
+            .catch(err => console.error("Error loading sidebar component:", err));
+    </script>
+    
+    <script type="module" src="../js/weatherPage.js"></script>
+    <script type="module" src="../components/sidebar.js"></script>
+</body>
+</html>

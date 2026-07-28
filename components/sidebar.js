@@ -2,15 +2,33 @@
 
 
 // Initialize Sidebar Tab Click Handlers
+document.addEventListener("click", (e) => {
+    const tab = e.target.closest(".tab");
+    if (!tab) return;
 
+    const page = tab.getAttribute("data-page");
+    const isPagesDir = window.location.pathname.includes("/pages/");
 
-// Responsive Sidebar ------------ Start
+    if (page === "dashboard") {
+        window.location.href = isPagesDir ? "../index.html" : "index.html";
+    } else if (page === "weather") {
+        window.location.href = isPagesDir ? "weatherPage.html" : "pages/weatherPage.html";
+    }
+});
 
-
-
-
-
-// Responsive Sidebar ------------ End
+// Mobile Sidebar Toggle Handler
+document.addEventListener("click", (e) => {
+    const toggleFill = document.querySelector("#fill");
+    const sidebar = document.querySelector("#sidebarComponent");
+    
+    if (e.target && e.target.id === "fill" && sidebar && toggleFill) {
+        toggleFill.classList.add("fill-js");
+        sidebar.classList.add("sidebar-js");
+    } else if (e.target && e.target.id === "line" && sidebar && toggleFill) {
+        toggleFill.classList.remove("fill-js");
+        sidebar.classList.remove("sidebar-js");
+    }
+});
 
 
 
