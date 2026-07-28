@@ -20,6 +20,16 @@ const element = {
 };
 
 
+const circleRemove = [ 
+
+    {air_circle: "air-circle-1"},
+    {air_circle: "air-circle-2"},
+    {air_circle: "air-circle-3"},
+    {air_circle: "air-circle-5"},
+    {air_circle: "air-circle-4"}
+]
+
+
 export const fetchAirData = async (lat, lon) => {
 
     try {
@@ -39,9 +49,13 @@ export const fetchAirData = async (lat, lon) => {
         switch (aqi) {
     case 1:
         element.air_level.innerHTML = "Good";
-        element.air_level.classList.add("air-level-1");
-        element.air_circle.classList.add("air-circle-1");
-        element.air_card.classList.add("air-card-1");
+
+        let removecircle = circleRemove.filter(c => c.air_circle != "air-circle-1");
+        removecircle.forEach(c => {
+            element.air_circle.classList.remove(`${c.air_circle}`)
+        })
+        element.air_circle.classList.add("air-circle-1")
+        
 
         if (element.mini_title) element.mini_title.textContent = "Air Quality (Good)";
         if (element.mini_desc) element.mini_desc.textContent = "Air is fresh & clean today.";
@@ -50,9 +64,11 @@ export const fetchAirData = async (lat, lon) => {
 
     case 2:
         element.air_level.innerHTML = "Fair";
-        element.air_level.classList.add("air-level-2");
-        element.air_circle.classList.add("air-circle-2");
-        element.air_card.classList.add("air-card-2");
+        let removecircle2 = circleRemove.filter(c => c.air_circle != "air-circle-2");
+        removecircle2.forEach(c => {
+            element.air_circle.classList.remove(`${c.air_circle}`)
+        })
+        element.air_circle.classList.add("air-circle-2")
 
         if (element.mini_title) element.mini_title.textContent = "Air Quality (Fair)";
         if (element.mini_desc) element.mini_desc.textContent = "Air quality is acceptable today.";
@@ -61,9 +77,13 @@ export const fetchAirData = async (lat, lon) => {
 
     case 3:
         element.air_level.innerHTML = "Moderate";
-        element.air_level.classList.add("air-level-3");
-        element.air_circle.classList.add("air-circle-3");
-        element.air_card.classList.add("air-card-3");
+        
+        let removecircle3 = circleRemove.filter(c => c.air_circle != "air-circle-3");
+        removecircle3.forEach(c => {
+            element.air_circle.classList.remove(`${c.air_circle}`)
+        })
+        element.air_circle.classList.add("air-circle-3")
+        
 
         if (element.mini_title) element.mini_title.textContent = "Air Quality (Moderate)";
         if (element.mini_desc) element.mini_desc.textContent = "AQI is moderate today.";
@@ -72,9 +92,11 @@ export const fetchAirData = async (lat, lon) => {
 
     case 4:
         element.air_level.innerHTML = "Poor";
-        element.air_level.classList.add("air-level-4");
-        element.air_circle.classList.add("air-circle-4");
-        element.air_card.classList.add("air-card-4");
+        let removecircle4 = circleRemove.filter(c => c.air_circle != "air-circle-4");
+        removecircle4.forEach(c => {
+            element.air_circle.classList.remove(`${c.air_circle}`)
+        })
+        element.air_circle.classList.add("air-circle-4")
 
         if (element.mini_title) element.mini_title.textContent = "Air Quality (Poor)";
         if (element.mini_desc) element.mini_desc.textContent = "Unhealthy air. Consider wearing a mask.";
@@ -83,9 +105,12 @@ export const fetchAirData = async (lat, lon) => {
 
     case 5:
         element.air_level.innerHTML = "Very Poor";
-        element.air_level.classList.add("air-level-5");
-        element.air_circle.classList.add("air-circle-5");
-        element.air_card.classList.add("air-card-5");
+        let removecircle5 = circleRemove.filter(c => c.air_circle != "air-circle-5");
+        removecircle5.forEach(c => {
+            element.air_circle.classList.remove(`${c.air_circle}`)
+        })
+        element.air_circle.classList.add("air-circle-5")
+        
 
         if (element.mini_title) element.mini_title.textContent = "Air Quality (Hazardous)";
         if (element.mini_desc) element.mini_desc.textContent = "Hazardous air! Wear a mask & avoid outdoors.";
