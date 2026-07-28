@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts - UrbanShield</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Remix Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../components/siderbar.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/alertsPage.css">
+</head>
+<body>
+
+    <div class="dashboard-layout d-flex">
+        <!-- Sidebar Container -->
+        <div id="sidebarComponent"></div>
+
+        <!-- MAIN ALERTS CONTENT -->
+        <div class="main-content flex-grow-1">
+            
+            <!-- Topbar / Header -->
+            <header class="topbar d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="t d-lg-none">
+                        <i class="ri-menu-line" id="fill"></i>
+                    </div>
+                    <a href="../index.html" class="alerts-back-btn" title="Back to Dashboard">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </a>
+                    <h5 class="alerts-header-title">Alerts Feed</h5>
+                </div>
+
+                <div class="user-actions d-flex align-items-center gap-3">
+                    <div class="notification-btn">
+                        <i class="ri-notification-3-line"></i>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Filter Tabs Bar -->
+            <div class="alerts-tabs-bar mb-4">
+                <button class="alert-tab-btn active" data-category="all">All</button>
+                <button class="alert-tab-btn" data-category="weather">Weather</button>
+                <button class="alert-tab-btn" data-category="air-quality">Air Quality</button>
+                <button class="alert-tab-btn" data-category="system">System</button>
+            </div>
+
+            <!-- Vertical Alert Feed -->
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="alerts-feed-container">
+                    
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Load Sidebar dynamically with relative path support
+        const isPagesDir = window.location.pathname.includes('/pages/');
+        const sidebarPath = isPagesDir ? '../components/sidebar.html' : 'components/sidebar.html';
+
+        fetch(sidebarPath)
+            .then(res => res.text())
+            .then(data => {
+                const sidebarContainer = document.getElementById("sidebarComponent");
+                if (sidebarContainer) {
+                    sidebarContainer.innerHTML = data;
+
+                    // Fix relative paths for logo if inside pages directory
+                    if (isPagesDir) {
+                        const logoImg = sidebarContainer.querySelector('.logo-text img');
+                        if (logoImg && !logoImg.src.includes('../assets/')) {
+                            logoImg.src = '../assets/logo.png';
+                        }
+
+                        // Highlight active Alerts tab
+                        const tabs = sidebarContainer.querySelectorAll('.tab');
+                        tabs.forEach(tab => {
+                            tab.classList.remove('tab-active');
+                            if (tab.getAttribute('data-page') === 'alerts') {
+                                tab.classList.add('tab-active');
+                            }
+                        });
+                    }
+                }
+            })
+            .catch(err => console.error("Error loading sidebar component:", err));
+    </script>
+    
+    <script type="module" src="../js/alertsPage.js"></script>
+    <script type="module" src="../components/sidebar.js"></script>
+</body>
+</html>

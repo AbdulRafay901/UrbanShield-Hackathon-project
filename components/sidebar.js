@@ -21,6 +21,8 @@ document.addEventListener("click", (e) => {
         window.location.href = isPagesDir ? "emergencyPage.html" : "pages/emergencyPage.html";
     } else if (page === "analytics") {
         window.location.href = isPagesDir ? "analyticsPage.html" : "pages/analyticsPage.html";
+    } else if (page === "alerts") {
+        window.location.href = isPagesDir ? "alertsPage.html" : "pages/alertsPage.html";
     }
 });
 
