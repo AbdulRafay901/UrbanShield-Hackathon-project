@@ -3,6 +3,7 @@
 
 import { WEATHER_API_KEY } from "../config.js";
 import { weatherTips, clearSafetyTips } from "../js/safetyTips.js";
+import { updateWeatherScore } from "../components/sidebar.js";
 
 
 // Weather Api ------------------- Start
@@ -43,6 +44,7 @@ export const fetchWeatherData = async (lat, lon) => {
         const humidity = current.main.humidity;
         const pressure = current.main.pressure;
         const visiblity = (current.visibility / 1000).toFixed(1);  
+
 
         // Mini Cards Elements ------------ Start
 
@@ -106,6 +108,10 @@ export const fetchWeatherData = async (lat, lon) => {
         }
 
         clearSafetyTips();
+        
+        // Safety Score ---------- Start
+          updateWeatherScore(name, temp);
+        // Safety Score ---------- End
 
         weatherTips(
             name,

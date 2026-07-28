@@ -46,6 +46,22 @@ body {
 }
 
 /* Header Elements */
+
+.t{
+    position: relative;
+}
+
+.t #fill{
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    color: var(--info);
+    font-size: 35px;
+}
+.t #line{    
+   font-size: 35px;
+   visibility: hidden;
+}
 .topbar {
     border-bottom: 1px solid var(--border);
     padding-bottom: 20px;

@@ -31,6 +31,8 @@ navigator.geolocation.getCurrentPosition(async (position) => {
 
 }, (error) => {
     console.log(error);
+
+    fetchLocationByIP()
 });
 
 

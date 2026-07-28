@@ -3,6 +3,7 @@
 import { WEATHER_API_KEY } from "../config.js";
 import { GEMINI_API_KEY } from "../config.js";
 import { airTips } from "../js/safetyTips.js";
+import { updateAirScore } from "../components/sidebar.js";
 
 
 
@@ -28,7 +29,7 @@ export const fetchAirData = async (lat, lon) => {
         const data = await res.json();
 
         const aqi = data.list[0].main.aqi;
-        airTips(aqi);
+
         if (element.aqi) element.aqi.textContent = aqi;
 
         const pm25 = data.list[0].components.pm2_5;
@@ -91,6 +92,10 @@ export const fetchAirData = async (lat, lon) => {
         if (element.mini_icon) element.mini_icon.className = "ri-error-warning-fill text-danger";
         break;
 }
+
+
+     airTips(aqi);
+     updateAirScore(aqi);
 
     } catch (error) {
         console.log(error);

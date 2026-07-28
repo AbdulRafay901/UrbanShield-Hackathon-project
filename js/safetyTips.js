@@ -6,7 +6,6 @@ let tips = [];
 
 
 function addTip(icon, color, title, desc) {
-
     
     const alreadyExists = tips.find(t => t.title === title);
 
@@ -37,7 +36,6 @@ function renderTips() {
     );
 
 }
-
 
      const priority = {
          danger: 1,
@@ -83,6 +81,8 @@ export function clearSafetyTips() {
 
 // Weather Tips
 export function weatherTips(weather, temp, humidity, wind) {
+
+    console.log(weather, temp, humidity, wind);
 
     if (weather === "Rain" || weather === "Drizzle") {
 

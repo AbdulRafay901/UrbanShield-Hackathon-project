@@ -1,6 +1,7 @@
 
 import { WEATHER_API_KEY } from "../config.js";
 import { uvTips } from "../js/safetyTips.js";
+import { updateUvScore } from "../components/sidebar.js";
 
 // DOM Elements Selection
 const uvValueElem = document.querySelector(".uv-value"); 
@@ -22,7 +23,6 @@ export const fetchUvData = async (lat, lon) => {
         const data = await res.json();
 
         const uvIndex = Math.round(data.current.uv_index); 
-        uvTips(uvIndex);
 
         let statusText = "";
         let adviceText = ""; 
@@ -65,6 +65,10 @@ export const fetchUvData = async (lat, lon) => {
             iconClass = "ri-fire-fill";
             level = 5;
         }
+
+
+        uvTips(uvIndex);
+        updateUvScore(uvIndex);
 
 
         if (uvValueElem) uvValueElem.textContent = uvIndex;
